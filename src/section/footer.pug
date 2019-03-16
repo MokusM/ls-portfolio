@@ -9,7 +9,12 @@ footer
         
     .footer-right
       .footer__nav
-        +nav('main-nav', ["Главная", "Обо мне", "Навыки" , "Работы", "Отзывы", "Связаться"])
+        div.main-nav
+          ul.main-nav-list
+            - var nav = ["Главная", "Обо мне", "Навыки" , "Работы", "Отзывы", "Связаться"];
+                each item in nav
+                  li.main-nav-list__item
+                    a(href="#").main-nav-list__link= item       
       .footer-bottom
         .footer-bottom__left
           p Этот сайт я сделал в рамках обучения в Школе онлайн образования Loftschool

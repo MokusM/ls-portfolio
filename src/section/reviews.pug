@@ -8,7 +8,13 @@ section.section-reviews
   .leaves-img.leaves-img_4
     +image('content/leaves-4.png')
   .wrapper
-    h2.section-title.section-title_white.section-reviews__title Что обо мне говорят
+    .row-with-btn.section-reviews__title
+      h2.section-title.section-title_white Что обо мне говорят
+      .slider-btn.slider-btn_horizontal.section-reviews__btns
+        button.slider-arrow.slider-prev.slider-arrow_round
+          +icon('arrow-down', 'arrow-left-icon')
+        button.slider-arrow.slider-next.slider-arrow_round
+          +icon('arrow-down', 'arrow-right-icon')
     .section-reviews__slider
       .reviews-slider
         .reviews-slider__item
@@ -41,20 +47,20 @@ section.section-reviews
           .box-field
             label.box-field__label Введите ваше имя
             .box-field__input
-              +icon('user', 'user-icon')
-              input.form-control(type="text",placeholder="Имя", value="Ковальчук Дмитрий")
+              +icon('user', 'user-icon box-field__icon')
+              input.form-control(type="text", value="Ковальчук Дмитрий" required)
               span.bottom-line
           .box-field
             label.box-field__label Введите ваш email
             .box-field__input              
-              +icon('envelope', 'envelope-icon')
-              input.form-control(type="email",placeholder="email" value="Ковальчук Дмитрий")
+              +icon('envelope', 'envelope-icon box-field__icon')
+              input.form-control(type="email", value="loftschool@study.com" required)
               span.bottom-line
         .box-field
             label.box-field__label Сообщение к письму
             .box-field__input
-              +icon('message', 'message-icon')
-              textarea.form-control(type="email",placeholder="email" value="Требуется ваша помощь в создании сайта.Интересуют сроки и цена вопроса")
+              +icon('message', 'message-icon box-field__icon')
+              textarea.form-control(placeholder="Требуется ваша помощь в создании сайта. Интересуют сроки и цена вопроса")
               span.bottom-line
         .box-field-btn
           input.btn.btn-orange(type="submit", value="Отправить")
