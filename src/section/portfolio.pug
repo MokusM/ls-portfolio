@@ -1,0 +1,39 @@
+section.section-portfolio 
+  .wrapper
+    h2.section-title.section-portfolio__title Мои работы
+    .portfolio-row
+      .portfolio-slider
+        .portfolio-big
+          .portfolio-big__counter 2
+          .portfolio-big__img
+            +image('content/previews-1.jpg') 
+          .portfolio-slider__btn   
+            .slider-btn
+              button.slider-arrow.slider-next
+                +icon('arrow-down', 'arrow-right-icon')
+              button.slider-arrow.slider-prev.disabled
+                +icon('arrow-down', 'arrow-left-icon')
+        .portfolio-slider__sm
+          ul.portfolio-sm
+            li.portfolio-sm__item.active
+              a.portfolio-sm__link
+                +image('content/previews-1.jpg')
+            - var portfolio = ['content/previews-2.jpg', 'content/previews-3.jpg', 'content/previews-4.jpg'];
+                each item in portfolio
+                  li.portfolio-sm__item
+                    a.portfolio-sm__link
+                      +image(`${item}`)
+
+      .portfolio-desc
+        .portfolio-desc__tag
+          ul.tag-list
+            - var tags = ['HTML', 'CSS', 'Javascript'];
+                each item in tags
+                  li.tag-list__item 
+                    .tag-list__title #{item}
+        .portfolio-desc__title Сайт школы  образования
+        .portfolio-desc__text
+          p Этот парень проходил обучение веб-разработке не где-то, а в LoftSchool! 2 месяца только самых тяжелых испытаний и бессонных ночей!
+        a.portfolio-link(href="#") 
+          +icon('link', 'link-icon')
+          span Посмотреть сайт

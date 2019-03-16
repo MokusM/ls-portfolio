@@ -1,0 +1,235 @@
+.section-reviews {  
+  background-image: url(../images/content/reviews-bg.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  padding: 141px 0 165px;
+  position: relative; 
+  &__title{
+    margin-bottom: 91px;
+  }
+  &__slider{
+    margin: 0 0px 192px;
+    max-width: 1006px;
+  }
+  &__form{
+    max-width: 870px;
+  }
+}
+.reviews-slider{
+  display: flex;  
+  &__item{
+    padding: 0 25px;
+  }
+  &__cont{
+    position: relative;
+    padding-left: 104px;    
+  }
+  &__desc{    
+    min-height: 103px;
+    p{
+      opacity: 0.5;
+      color: white;
+      font-size: 16px;
+      font-weight: 600;
+      line-height: 30px;
+    }
+  }
+  &__author{
+    margin-top: 23px;
+  }
+}
+.reviews-author{
+  display: flex;
+  
+  &__img{
+    width: 75px;
+    height: 75px;
+    background-color: #b0b0b0;
+    border-radius: 50%;
+    overflow: hidden;
+    img{
+      border-radius: 50%;
+      max-width: 6000px;
+    }
+  }
+  &__text{
+    width: calc(100% - 75px);
+    padding-left: 28px;
+    padding-top: 9px
+  }
+  &__name{
+    color: white;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 24px;
+    margin-bottom: 12px;
+  }
+  &__prof{
+    opacity: 0.3;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 24px;
+  }
+}
+.quote-icon{
+  width: 73px;
+  height: 78px;
+  opacity: 0.05;
+  fill: white;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+
+.box-field{
+  &__label{
+    opacity: 0.3;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 22px;
+    padding-left: 46px;
+    margin-bottom: 2px;
+    display: block;
+  }
+  &__row{
+    display: flex;
+    margin: 0 -25px 37px;
+    .box-field{
+      padding: 0 25px;
+      margin-bottom: 0;
+      width: 50%;
+    }
+  }
+  &__input{
+    display: flex;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    svg{
+      position: absolute;
+      left: 0;
+      top: 8px;
+      transition: all 0.3s;
+    }
+    &:hover{
+      .bottom-line{
+        left: 0;
+      }
+      svg{
+        fill: #ff9a00;
+        opacity: 1;
+      }
+    }
+  }
+}
+.form-control{
+  background-color: transparent;
+  border: none;
+  color: white;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 48px;
+  height: 65px;
+  width: 100%;  
+  border-bottom: 1px solid rgba(255,255,255,1);
+  padding: 0 0 0 46px; 
+  &:focus{
+    outline: none;
+    &+.bottom-line{
+      left: 0;
+    }
+  }
+  &:active{
+    &+.bottom-line{
+      left: 0;
+    }
+  }
+}
+.bottom-line{
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  height: 1px;
+  background-color: #ff9a00;
+  transition: all 0.3s;
+  left: -100%;
+}
+textarea.form-control{
+  resize: none;
+  min-height: 101px;
+}
+
+.user-icon{
+  width: 26px;
+  height: 30px;
+  opacity: 0.3;
+  fill: white;
+}
+.envelope-icon{
+  width: 30px;
+  height: 23px;
+  opacity: 0.3;
+  fill: white;
+}
+.message-icon{
+  width: 30px;
+  height: 30px;
+  opacity: 0.3;
+  fill: white;
+}
+
+.box-field-btn{
+  margin-top: 61px
+}
+.btn{
+  display: inline-block;
+  vertical-align: top;
+}
+.btn-orange{
+  width: 100%;
+  max-width: 347px;
+  height: 80px;
+  background-color: white;
+  background-image: linear-gradient(to right, #ea7400 0%, #f29400 100%);
+  text-align: center;
+  color: white;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 24px;
+  text-transform: uppercase;
+  border: none;
+  transition: all 0.5s;
+  cursor: pointer;
+  &:hover{
+    background-image: linear-gradient(to right, #ff7f00 0%, #ff9d00 100%);
+  }
+}
+
+.leaves-img{
+  position: absolute;
+  right: 0;
+  &_4{
+    top: -165px;
+    right: -5px;
+  }
+  &_1{
+    bottom: 10.5%;
+    right: 162px;
+  }
+  &_2{
+    top: 50.2%;
+    right: 172px;
+  }
+  &_3{
+    top: 32.5%;
+    right: 19.5%;
+  }
+  img{
+    max-width: 100%;
+    display: block;
+  }
+}
