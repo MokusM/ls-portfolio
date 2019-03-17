@@ -18,4 +18,4 @@ mixin list-link(className, items, classIcon)
       each item in items
         li(class=`${className}-list__item`)
           a(class=`${className}-list__link` href="#")
-            +icon(`${item}`, `${classIcon}`)
+            +icon(`${item}`, `${classIcon} ${classIcon}_${item}`)
