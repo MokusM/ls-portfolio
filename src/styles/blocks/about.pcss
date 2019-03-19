@@ -9,15 +9,43 @@
   padding: 103px 0 176px;
   max-width: 1006px;
   margin: 0 auto;
+  @include desktop {
+    max-width: 100%;
+  }
+  @include tablets{
+    display: block;
+  }
 }
 
 .about__left{
   width: 37.5%;
+  @include desktop {
+    width: 32.5%;
+  }
+  @include bp-tablets-lg {
+    width: 44%;
+  }
+  @include tablets{
+    width: 100%;
+    margin-bottom: 45px;
+  }
 }
 .about__right{
   width: 62.5%;
   padding-left: 66px;
   margin-top: -2px;
+  @include desktop {
+    width: 67.5%;
+    padding-left: 104px;
+  }
+  @include bp-tablets-lg {
+    width: 56%;
+    padding-left: 12px;
+  }
+  @include tablets{
+    width: 100%;
+    padding-left: 0;
+  }
 }
 
 .user{
@@ -28,6 +56,16 @@
     border-radius: 50%;
     overflow: hidden;
     margin:  0 auto 66px;
+    @include bp-tablets-lg {     
+      width: 170px;
+      height: 170px;
+      margin-right: auto;
+      margin-left: 0;
+      margin-bottom: 45px;
+    }
+    @include tablets{
+      margin-left: auto;
+    }
     img{
       display: block;
       max-width: 100%;
@@ -41,12 +79,21 @@
   margin: 0 auto;
   &__table{
     width: 100%;
+    @include bp-tablets-lg {
+      max-width: 235px;
+    }
   }
   &__row{
     display: flex;
     margin-bottom: 10px;
+    @include bp-tablets-lg {
+      margin-bottom: 0;
+    }
     &:last-child{
       margin-bottom: 10px;
+      @include bp-tablets-lg {
+        margin-bottom: 0;
+      }
     }
   }
   &__cell{
@@ -55,6 +102,9 @@
     font-size: 16px;
     font-weight: 600;
     line-height: 29px;
+    @include bp-tablets-lg {     
+      font-size: 14px;
+    }
     &_1{
       opacity: 0.15;
       width: 49%;
@@ -71,10 +121,17 @@
   font-size: 16px;
   font-weight: 600;
   line-height: 30px;
+  @include bp-tablets-lg {     
+    font-size: 14px;
+    line-height: 24px;
+  }
   &__subtitle{
     opacity: 0.5;
     margin-bottom: 15px;
-    display: block;
+    display: block; 
+    @include bp-tablets-lg {     
+      margin-bottom: 8px;
+    }   
   }
   &__name{
     color: white;
@@ -82,10 +139,21 @@
     font-weight: 700;
     line-height: 48px;
     margin-bottom: 27px;
+    @include bp-tablets-lg {     
+      font-size: 30px;
+      line-height: 48px;
+      margin-bottom: 45px;
+    }
+    @include tablets { 
+      line-height: 36px;
+    }
   }
   &__desc{
     opacity: 0.5;
     min-height: 152px;
+    @include bp-tablets-lg {     
+      min-height: 109px;
+    }
     &_italic{
       font-style: italic;
       position: relative;

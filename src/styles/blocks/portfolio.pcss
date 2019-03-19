@@ -1,13 +1,22 @@
 .section-portfolio {
   padding: 175px 0 205px;
+  @include desktop {
+    padding: 125px 0 148px;
+  }
   &__title{
     margin-bottom: 75px;
+    @include desktop {
+      margin-bottom: 46px;
+    }
   }
 }
 
 .portfolio-row{
   display: flex;
   justify-content: space-between;
+  @include bp-tablets-lg {     
+    display: block;
+  }
 }
 .tag-list{
   margin: 0 -5px 0px;
@@ -28,20 +37,33 @@
     background-color: rgba(122,160,197,0.1);
   }
 }
-.portfolio-slider{
+.portfolio-row__slider{
+  padding-right: 110px;
   width: calc(100% - 347px);
+  @include bp-tablets-lg {     
+    width: 100%;
+    margin-bottom: 45px;
+  }
+}
+.portfolio-slider{ 
   position: relative;
   max-width: 975px;
   &__btn{
     position: absolute;
     bottom: 60px;
     left: 100%;
+    @include desktop {
+      bottom: 30px;
+    }
   }
   &__sm{    
     position: absolute;
     right: 0;
     bottom: 60px;
-    z-index: 4;
+    z-index: 6;
+    @include desktop {
+      bottom: 30px;
+    }
   }
 }
 .portfolio-big{
@@ -49,8 +71,11 @@
   &__img{    
     position: relative;
     z-index: 2;
-    height: 549px;
+    max-height: 549px;
     overflow: hidden;
+    @include desktop {
+      max-height: 353px;
+    }
     img{
       display: block;
       max-height: 60000px;
@@ -65,6 +90,11 @@
     position: absolute;
     left: calc(100% - 62px);
     bottom: 117px;
+    @include desktop {
+      font-size: 300px;
+      line-height: 300px;
+      bottom: 90px;
+    }
   }
 }
 .slider-btn{
@@ -143,6 +173,11 @@
         z-index: 4;
       }
     }
+    &.hidden-tablet{
+      @include desktop {
+        display: none;
+      }
+    }
   }
   &__link{
     width: 178px;
@@ -178,6 +213,10 @@
   width: 347px;
   position: relative;
   z-index: 5;
+  @include bp-tablets-lg {     
+    width: 100%;
+    text-align: center;
+  }
   &__title{
     color: #2d3c4e;
     font-size: 30px;

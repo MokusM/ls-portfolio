@@ -1,10 +1,5 @@
 html {
-  @include desktop {
-    font-size: 15px;
-  }
-  @include tablets {
-    font-size: 14px;
-  }
+ 
 }
 body,
 html {
@@ -101,6 +96,15 @@ img {
   max-width: 1570px;
   margin: 0 auto;
   padding:  0 44px;
+  @include desktop {
+    padding:  0 60px;
+  }
+  @include bp-tablets-lg {
+    padding:  0 40px;
+  }
+  @include tablets{
+    padding: 0 30px;
+  }
 }
 
 .main-screen{
@@ -112,12 +116,26 @@ img {
   height: 100vh;
   min-height: 650px;
   position: relative;
+  @include desktop {
+    margin-bottom: 540px;
+  }
+  @include bp-tablets-lg {     
+    height: 605px;
+    min-height: 605px;
+    margin-bottom: 390px;
+  }
   &__wrapper{
     display: flex;
     flex-direction: column;
     height: 100%;
     padding-bottom: 28px;    
     padding-top: 155px;
+    @include desktop {
+      padding-top: 124px;
+    }
+    @include bp-tablets-lg {     
+     padding-bottom: 125px;
+    }
   }
   &__text{
     flex: 1;
@@ -125,10 +143,19 @@ img {
     justify-content: center;
     align-items: center;
     padding-right: 300px;
+    @include desktop {
+      padding-right: 35px;
+    }
+    @include bp-tablets-lg {     
+      padding-right: 0;
+    }
   }
   &__btn{
     display: flex;
     justify-content: center;
+    @include bp-tablets-lg {     
+      display: none;
+    }
   }
 }
 .main-screen-bg{
@@ -141,6 +168,13 @@ img {
   width: 100%;
   top: 52vh;
   height: calc(100% - 52vh + 750px);
+  @include desktop {
+    height: calc(100% - 52vh + 540px);
+  }
+  @include bp-tablets-lg {     
+    top: 350px;
+    height: calc(100%  + 42px);
+  }
   &:before{
     content: "";
     display: block;
@@ -165,6 +199,10 @@ img {
 .user-info{
   display: flex;
   align-content: flex-start;
+  @include bp-tablets-lg {     
+    display: block;
+    text-align: center;
+  }
   &__desc{
     opacity: 0.4;
     color: white;
@@ -174,17 +212,30 @@ img {
     text-align: right;
     max-width: 180px;
     margin-right: 52px;
+    @include bp-tablets-lg {     
+      margin: 0 auto 15px;
+      text-align: center;
+      font-size: 16px;
+      line-height: 30px;
+    }
   }
   &__name{
     color: white;
     font-size: 72px;
     font-weight: 800;
-    line-height: 60px;
+    line-height: 60px;    
     span{
       display: block;
       &:last-child{
-        padding-left: 8px
+        padding-left: 8px;
+        @include bp-tablets-lg {     
+          padding-left: 0;
+        }
       }
+    }
+    @include bp-tablets-lg {     
+      font-size: 48px;
+      line-height: 48px;
     }
   }
 }
@@ -205,6 +256,9 @@ img {
       fill: $main-color;
     }
   }
+  @include bp-tablets-lg {     
+    display: none;
+  }
 }
 .scroll-icon{
   height: 30px;
@@ -221,8 +275,16 @@ img {
   &_sm{
     font-size: 30px;
     line-height: 36px;
+    @include tablets{
+      font-size: 24px;
+      line-height: 36px;
+    }
   }
   &_white{
     color: white;
+  }
+  @include tablets{
+    font-size: 24px;
+    line-height: 36px;
   }
 }

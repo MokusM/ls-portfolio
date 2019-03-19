@@ -11,6 +11,10 @@
   left: 0;
   bottom: -78px;
   max-width: 650px;
+  @include desktop {
+    max-width: 490px;
+    left: -95px;
+  }
   img{
     display: block;
     max-width: 100%;
@@ -19,6 +23,12 @@
 .box-skills{
   color: #fff;
   padding-left: 505px;
+  @include desktop {
+    padding-left: 278px;
+  }
+  @include bp-tablets-lg {     
+    padding-left: 0;
+  }
 }
 .skills-row{
   &__title{
@@ -28,11 +38,18 @@
     line-height: 32px;
     padding: 15px 0;
     margin-bottom: 21px;
+    @include bp-tablets-lg {     
+     text-align: center;
+    }
   }
 }
 .skills-title{
   max-width: 600px;  
   margin-bottom: 53px;
+  @include bp-tablets-lg {     
+    max-width: 100%;
+    text-align: center;
+  }
 }
 .skills-title__title{  
   margin-bottom: 20px;
@@ -48,14 +65,26 @@
   }
 }
 .user-skills{
-  padding-left: 124px
+  padding-left: 124px;
+  @include desktop {
+    padding-left: 88px;
+  }
+  @include bp-tablets-lg {     
+   padding-left: 0;
+  }
 }
 .skills-list{
   margin: 0 0 0px;
+  @include bp-tablets-lg {     
+    text-align: center;
+  }
   &__item{
     display: inline-block;
     vertical-align: top;
     margin: 0 60px 28px 0;
+    @include desktop {
+      margin-right: 34px;
+    }
   }
   
 }

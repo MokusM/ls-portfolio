@@ -19,13 +19,24 @@
 .footer__left{
 	display: flex;
 	width: 34.1%;
+	@include desktop {
+		display: block;
+		width: 25.7%;
+	} 
 }
 .footer__left-author{
 	max-width: 185px;
 	padding-left: 62px;
+	@include desktop {
+		padding-left: 0;
+		padding-top: 12px;
+	} 
 }
 .footer__right{
 	width: 65.9%;
+	@include desktop {
+		width: 74.7%;
+	} 
 }
 .copyright{
 	opacity: 0.1;

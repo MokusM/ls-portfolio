@@ -11,6 +11,9 @@
   &__slider{
     margin: 0 0px 179px;
     max-width: 1006px;
+    @include desktop {
+      max-width: 940px;
+    }
   }
   &__form{
     max-width: 870px;
@@ -25,12 +28,18 @@
 }
 .reviews-slider{
   display: flex;  
+  @include desktop {
+    margin: 0 -25px;
+  }
   &__item{
     padding: 0 25px;
   }
   &__cont{
     position: relative;
-    padding-left: 104px;    
+    padding-left: 104px;   
+    @include desktop {
+      padding-left: 93px;
+    } 
   }
   &__desc{    
     min-height: 103px;
@@ -86,6 +95,10 @@
   position: absolute;
   left: 0;
   top: 0;
+  @include desktop {
+    width: 69px;
+    height: 59px;
+  }
 }
 
 
@@ -224,21 +237,32 @@ textarea.form-control{
     background-image: linear-gradient(to right, #ff7f00 0%, #ff9d00 100%);
   }
 }
-
 .leaves-img{
   position: absolute;
   right: 0;
+  @include phones {
+    display: none;
+  }
   &_4{
     top: -165px;
     right: -5px;
+    @include desktop {
+      right: -125px;
+    }  
   }
   &_1{
     bottom: 10.5%;
     right: 162px;
+    @include desktop {
+      right: 45px;
+    } 
   }
   &_2{
     top: 50.2%;
     right: 172px;
+    @include desktop {
+      right: 55px;
+    }  
   }
   &_3{
     top: 32.5%;
