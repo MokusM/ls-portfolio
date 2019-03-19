@@ -67,7 +67,18 @@
     bottom: 117px;
   }
 }
-
+.slider-btn{
+  &_horizontal{
+    display: flex;
+    .slider-arrow{
+      margin-right: 30px;
+      &:last-child{
+        margin-right: 0;
+      }
+    }
+  }
+  
+}
 .slider-arrow{
   width: 50px;
   height: 50px;
@@ -90,6 +101,16 @@
   }
   &:hover{
     background-color: #ff9a00;
+  }
+  &_round{    
+    background: transparent;
+    border-radius: 50%;
+    border: 1px solid #fff;
+    color: #fff;
+    &:hover{
+      background-color: transparent;
+      opacity: 0.3;
+    }
   }
 }
 .slider-prev{

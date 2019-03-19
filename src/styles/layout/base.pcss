@@ -93,8 +93,6 @@ img {
 .content{	
 	text-align:left;
   width: 100%;
-	order: 2;
-  -webkit-order: 2;
 	flex-grow: 1;
   -webkit-flex-grow: 1;
 }
@@ -142,7 +140,7 @@ img {
   left: 0;
   width: 100%;
   top: 52vh;
-  height: 1238px;
+  height: calc(100% - 52vh + 750px);
   &:before{
     content: "";
     display: block;
@@ -201,10 +199,17 @@ img {
   &__text{
     margin-right: 10px;
   }
+  &:hover{
+    color: $main-color;
+    .scroll-icon{
+      fill: $main-color;
+    }
+  }
 }
 .scroll-icon{
   height: 30px;
   fill: white; 
+  transition: all 0.3s;
 }
 
 .section-title{

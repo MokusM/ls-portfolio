@@ -3,18 +3,25 @@
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
-  padding: 141px 0 165px;
+  padding: 127px 0 165px;
   position: relative; 
   &__title{
-    margin-bottom: 91px;
+    margin-bottom: 74px;
   }
   &__slider{
-    margin: 0 0px 192px;
+    margin: 0 0px 179px;
     max-width: 1006px;
   }
   &__form{
     max-width: 870px;
   }
+  &__btns{
+    padding-left: 95px
+  }
+}
+.row-with-btn{
+  display: flex;
+  align-items: center;
 }
 .reviews-slider{
   display: flex;  
@@ -40,12 +47,10 @@
   }
 }
 .reviews-author{
-  display: flex;
-  
+  display: flex;  
   &__img{
     width: 75px;
     height: 75px;
-    background-color: #b0b0b0;
     border-radius: 50%;
     overflow: hidden;
     img{
@@ -92,7 +97,7 @@
     font-weight: 600;
     line-height: 22px;
     padding-left: 46px;
-    margin-bottom: 2px;
+    margin-bottom: 4px;
     display: block;
   }
   &__row{
@@ -104,17 +109,16 @@
       width: 50%;
     }
   }
+  &__icon{
+    position: absolute;
+    left: 0;
+    top: 20px;
+    transition: all 0.3s;
+  }
   &__input{
-    display: flex;
     position: relative;
     overflow: hidden;
     cursor: pointer;
-    svg{
-      position: absolute;
-      left: 0;
-      top: 8px;
-      transition: all 0.3s;
-    }
     &:hover{
       .bottom-line{
         left: 0;
@@ -133,10 +137,11 @@
   font-size: 18px;
   font-weight: 700;
   line-height: 48px;
-  height: 65px;
+  height: 64px;
   width: 100%;  
   border-bottom: 1px solid rgba(255,255,255,1);
   padding: 0 0 0 46px; 
+  font-family: "Open Sans", sans-serif;
   &:focus{
     outline: none;
     &+.bottom-line{
@@ -148,6 +153,18 @@
       left: 0;
     }
   }
+  &:-moz-placeholder,
+	&::-moz-placeholder{
+		color: white;
+		opacity: 1;
+	}
+	&::-webkit-input-placeholder{
+		color: white;
+	}
+	&:-ms-input-placeholder{
+    color: white;
+		opacity: 1;
+	}
 }
 .bottom-line{
   position: absolute;
@@ -160,30 +177,29 @@
 }
 textarea.form-control{
   resize: none;
-  min-height: 101px;
+  height: 101px;
+  padding-top: 7px;
+  display: block;
 }
 
 .user-icon{
-  width: 26px;
-  height: 30px;
+  width: 29px;
   opacity: 0.3;
   fill: white;
 }
 .envelope-icon{
   width: 30px;
-  height: 23px;
   opacity: 0.3;
   fill: white;
 }
 .message-icon{
   width: 30px;
-  height: 30px;
   opacity: 0.3;
   fill: white;
 }
 
 .box-field-btn{
-  margin-top: 61px
+  padding-top: 54px;
 }
 .btn{
   display: inline-block;

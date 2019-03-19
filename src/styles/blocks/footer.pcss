@@ -1,10 +1,8 @@
-footer{	
+.footer{	
 	text-align:left;
 	width:100%;
-	order: 3;	
-  -webkit-order: 3;	
 	background-color: $footer-bg;
-	padding:66px 0;
+	padding:73px 0;
 	p{
 		opacity: 0.3;
 		color: white;
@@ -18,16 +16,16 @@ footer{
 	align-items: flex-start;
 	justify-content: space-between;
 }
-.footer-left{
+.footer__left{
 	display: flex;
-	width: 34.3%;
-	&__author{		
-		max-width: 185px;
-		padding-left: 62px;
-	}
+	width: 34.1%;
 }
-.footer-right{
-	width: 65.7%;
+.footer__left-author{
+	max-width: 185px;
+	padding-left: 62px;
+}
+.footer__right{
+	width: 65.9%;
 }
 .copyright{
 	opacity: 0.1;
@@ -61,7 +59,13 @@ footer{
 	margin-bottom: 55px;
 }
 .footer__social{
-	margin-top: 10px;
+	margin-top: 24px;
+	.social-list__item{
+		margin-right: 18px;
+		&:last-child{
+			margin-right: 0;
+		}
+	}
 }
 .footer-bottom{
 	display: flex;
