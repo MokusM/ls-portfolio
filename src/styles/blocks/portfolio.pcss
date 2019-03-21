@@ -3,10 +3,23 @@
   @include desktop {
     padding: 125px 0 148px;
   }
+  @include bp-tablets-lg {     
+    padding: 97px 0 115px;
+  }
+  @include tablets {     
+    padding: 74px 0 100px;
+  }
   &__title{
     margin-bottom: 75px;
     @include desktop {
       margin-bottom: 46px;
+    }
+    @include bp-tablets-lg {     
+      margin-bottom: 32px;
+    }
+    @include tablets {     
+      text-align: center;
+      margin-bottom: 12px;
     }
   }
 }
@@ -35,6 +48,12 @@
     border-radius: 22px;
     padding: 11px 21px 0;
     background-color: rgba(122,160,197,0.1);
+    @include tablets {     
+      font-size: 13px;
+      height: 40px;
+      border-radius: 20px;
+      padding: 8px 18px 0;
+    }
   }
 }
 .portfolio-row__slider{
@@ -42,7 +61,11 @@
   width: calc(100% - 347px);
   @include bp-tablets-lg {     
     width: 100%;
-    margin-bottom: 45px;
+    margin-bottom: 63px;
+    padding-right: 62px;
+  }
+  @include tablets {     
+    padding-right: 0;
   }
 }
 .portfolio-slider{ 
@@ -55,6 +78,12 @@
     @include desktop {
       bottom: 30px;
     }
+    @include tablets {     
+      left: auto;
+      right: 0;
+      z-index: 6;
+      bottom: 0;
+    }
   }
   &__sm{    
     position: absolute;
@@ -64,10 +93,15 @@
     @include desktop {
       bottom: 30px;
     }
+    
   }
 }
 .portfolio-big{
   position: relative;
+  @include tablets {     
+    margin-left: -30px;
+    margin-right: -30px;
+  }
   &__img{    
     position: relative;
     z-index: 2;
@@ -94,6 +128,9 @@
       font-size: 300px;
       line-height: 300px;
       bottom: 90px;
+    }
+    @include tablets {     
+      display: none;
     }
   }
 }
@@ -158,6 +195,9 @@
 }
 .portfolio-sm{
   display: flex;
+  @include tablets {     
+    display: none;
+  }
   &__item{
     &.active{     
       position: relative;
@@ -217,24 +257,54 @@
     width: 100%;
     text-align: center;
   }
+  @include tablets {     
+    text-align: left;
+  }
   &__title{
     color: #2d3c4e;
     font-size: 30px;
     font-weight: 700;
     line-height: 48px;
     margin-bottom: 29px;
+    @include bp-tablets-lg {     
+      margin-bottom: 18px;
+    }
+    @include tablets {     
+      font-size: 24px;
+      line-height: 30px;
+      margin-bottom: 15px;
+    }
+    
   }
   &__tag{
     margin-bottom: 39px;
+    @include bp-tablets-lg {     
+      margin-bottom: 17px;
+    }
+    @include tablets {     
+     margin-bottom: 20px;
+    }
   }
   &__text{    
     margin-bottom: 37px;
+    @include bp-tablets-lg {     
+      margin-bottom: 17px;
+    }
+    @include tablets {     
+      margin-bottom: 24px;
+    }
     p{
       opacity: 0.7;
       color: #2b3948;
       font-size: 16px;
       font-weight: 600;
       line-height: 30px;
+      @include bp-tablets-lg {     
+        font-size: 14px;
+        line-height: 24px;
+        max-width: 440px;
+        margin: 0 auto;
+      }
     }
   }
   
@@ -244,6 +314,9 @@
   font-size: 18px;
   font-weight: 700;
   line-height: 22px;
+  @include bp-tablets-lg {     
+    font-size: 14px;
+  }
   span{
     display: inline-block;
     vertical-align: middle;

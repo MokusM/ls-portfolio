@@ -8,6 +8,8 @@ import "./scripts/header";
 import "./scripts/parallax";
 
 
+
+
 let navBtn = document.querySelector('.button-nav');
 
 navBtn.addEventListener('click', function (e) {

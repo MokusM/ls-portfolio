@@ -5,8 +5,30 @@
   background-position: center center;
   padding: 127px 0 165px;
   position: relative; 
+  @include bp-tablets-lg {     
+    padding: 105px 0 108px;
+  }
+  @include tablets {     
+    padding: 73px 0 108px;
+  }
   &__title{
     margin-bottom: 74px;
+    @include bp-tablets-lg {     
+      margin-bottom: 45px;
+    }
+    @include tablets {     
+      margin-bottom: 28px;
+    }
+  }
+  &__form-title{
+    @include bp-tablets-lg {     
+     text-align: center;
+     margin-bottom: 24px;
+    }
+    @include tablets {     
+      text-align: left;
+      margin-bottom: 29px;
+    }
   }
   &__slider{
     margin: 0 0px 179px;
@@ -14,25 +36,52 @@
     @include desktop {
       max-width: 940px;
     }
+    @include bp-tablets-lg {     
+      margin-bottom: 93px;
+    }
+    @include tablets {     
+      margin-bottom: 126px;
+    }
   }
   &__form{
     max-width: 870px;
   }
   &__btns{
-    padding-left: 95px
+    padding-left: 95px;
+    @include bp-tablets-lg {     
+      padding-left: 70px;
+    }
+    @include tablets {     
+      padding-left: 0;
+      display: flex;
+      justify-content: center;
+      padding-top: 8px;
+    }
   }
 }
 .row-with-btn{
   display: flex;
   align-items: center;
+  @include tablets {     
+    display: block;
+  }
 }
 .reviews-slider{
   display: flex;  
   @include desktop {
     margin: 0 -25px;
   }
+  @include bp-tablets-lg {     
+    padding-right: 22px;
+  }
   &__item{
     padding: 0 25px;
+    @include tablets {  
+      padding: 0;   
+      &:nth-child(2){
+        display: none;
+      }
+    }
   }
   &__cont{
     position: relative;
@@ -40,6 +89,12 @@
     @include desktop {
       padding-left: 93px;
     } 
+    @include bp-tablets-lg {     
+      padding-left: 40px;
+    }
+    @include tablets {
+      padding-left: 27px;
+    }
   }
   &__desc{    
     min-height: 103px;
@@ -49,14 +104,24 @@
       font-size: 16px;
       font-weight: 600;
       line-height: 30px;
+      @include bp-tablets-lg {     
+        font-size: 14px;
+        line-height: 24px;
+      }
     }
   }
   &__author{
     margin-top: 23px;
+    @include bp-tablets-lg {     
+      margin-top: 18px;
+    }
+    @include tablets {
+      margin-top: 23px;
+    }
   }
 }
 .reviews-author{
-  display: flex;  
+  display: flex;    
   &__img{
     width: 75px;
     height: 75px;
@@ -66,11 +131,22 @@
       border-radius: 50%;
       max-width: 6000px;
     }
+    @include tablets {
+      width: 50px;
+      height: 50px;
+    }
   }
   &__text{
     width: calc(100% - 75px);
     padding-left: 28px;
-    padding-top: 9px
+    padding-top: 9px;
+    @include bp-tablets-lg {     
+      padding-left: 18px;
+    }
+    @include tablets {
+      padding-top: 2px;
+      width: calc(100% - 50px);
+    }
   }
   &__name{
     color: white;
@@ -78,6 +154,14 @@
     font-weight: 700;
     line-height: 24px;
     margin-bottom: 12px;
+    @include bp-tablets-lg {     
+      font-size: 16px;
+      line-height: 24px;
+      margin-bottom: 8px;      
+    }
+    @include tablets {
+      margin-bottom: 2px;
+    }
   }
   &__prof{
     opacity: 0.3;
@@ -85,6 +169,9 @@
     font-size: 16px;
     font-weight: 600;
     line-height: 24px;
+    @include bp-tablets-lg {     
+      font-size: 14px;
+    }
   }
 }
 .quote-icon{
@@ -99,6 +186,10 @@
     width: 69px;
     height: 59px;
   }
+  @include bp-tablets-lg {     
+    width: 30px;
+    height: 26px;
+  }
 }
 
 
@@ -112,14 +203,32 @@
     padding-left: 46px;
     margin-bottom: 4px;
     display: block;
+    @include bp-tablets-lg {     
+      font-size: 14px;
+    }
   }
   &__row{
     display: flex;
     margin: 0 -25px 37px;
+    @include bp-tablets-lg {     
+      margin: 0 -10px 35px;
+    }
+    @include tablets {     
+      margin: 0 0 50px 0;
+      display: block;
+    }
     .box-field{
       padding: 0 25px;
       margin-bottom: 0;
       width: 50%;
+      @include bp-tablets-lg {     
+        padding: 0 10px;
+      }
+      @include tablets {     
+        padding: 0;
+        margin: 0 0 31px 0;
+        width: 100%;
+      }
     }
   }
   &__icon{
@@ -127,6 +236,9 @@
     left: 0;
     top: 20px;
     transition: all 0.3s;
+    @include bp-tablets-lg {     
+      top: 13px;
+    }
   }
   &__input{
     position: relative;
@@ -155,6 +267,10 @@
   border-bottom: 1px solid rgba(255,255,255,1);
   padding: 0 0 0 46px; 
   font-family: "Open Sans", sans-serif;
+  @include bp-tablets-lg {     
+    font-size: 14px;
+    height: 56px;
+  }
   &:focus{
     outline: none;
     &+.bottom-line{
@@ -193,6 +309,15 @@ textarea.form-control{
   height: 101px;
   padding-top: 7px;
   display: block;
+  line-height: 24px;
+  @include bp-tablets-lg {     
+    padding-top: 3px;
+    height: 79px;
+  }
+  @include tablets {     
+   padding-top: 14px;
+   height: 101px;
+  }
 }
 
 .user-icon{
@@ -213,6 +338,11 @@ textarea.form-control{
 
 .box-field-btn{
   padding-top: 54px;
+  @include bp-tablets-lg {     
+    text-align: center;
+    padding-top: 30px;
+  }
+  
 }
 .btn{
   display: inline-block;
@@ -236,10 +366,15 @@ textarea.form-control{
   &:hover{
     background-image: linear-gradient(to right, #ff7f00 0%, #ff9d00 100%);
   }
+  @include tablets {     
+    height: 60px;
+    font-size: 16px;
+  }
 }
 .leaves-img{
   position: absolute;
   right: 0;
+  transform: translateY(0);
   @include phones {
     display: none;
   }
@@ -249,6 +384,12 @@ textarea.form-control{
     @include desktop {
       right: -125px;
     }  
+    @include bp-tablets-lg {     
+      right: -168px;
+      top: -130px;
+      max-width: 300px;
+    }
+    
   }
   &_1{
     bottom: 10.5%;
@@ -256,6 +397,11 @@ textarea.form-control{
     @include desktop {
       right: 45px;
     } 
+    @include bp-tablets-lg { 
+      max-width: 280px;
+      right: -20px;
+      bottom: 16.5%;
+    }
   }
   &_2{
     top: 50.2%;
@@ -263,10 +409,20 @@ textarea.form-control{
     @include desktop {
       right: 55px;
     }  
+    @include bp-tablets-lg { 
+      top: 48%;
+      max-width: 66px;
+      right: -20px;
+    }
   }
   &_3{
     top: 32.5%;
     right: 19.5%;
+    @include bp-tablets-lg { 
+      top: 31.5%;    
+      right: 102px;
+      width: 88px;
+    }
   }
   img{
     max-width: 100%;

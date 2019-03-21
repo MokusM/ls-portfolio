@@ -12,8 +12,12 @@
   @include desktop {
     max-width: 100%;
   }
+  @include bp-tablets-lg {
+    padding: 107px 0 140px;
+  }
   @include tablets{
     display: block;
+    padding: 41px 0 55px;
   }
 }
 
@@ -27,7 +31,7 @@
   }
   @include tablets{
     width: 100%;
-    margin-bottom: 45px;
+    margin-bottom: 35px;
   }
 }
 .about__right{
@@ -65,6 +69,7 @@
     }
     @include tablets{
       margin-left: auto;
+      margin-bottom: 19px;
     }
     img{
       display: block;
@@ -81,6 +86,9 @@
     width: 100%;
     @include bp-tablets-lg {
       max-width: 235px;
+    }
+    @include tablets{
+      max-width: 380px;
     }
   }
   &__row{
@@ -130,8 +138,11 @@
     margin-bottom: 15px;
     display: block; 
     @include bp-tablets-lg {     
-      margin-bottom: 8px;
+      margin-bottom: 2px;
     }   
+    @include tablets{
+      margin-bottom: 8px;
+    }
   }
   &__name{
     color: white;
@@ -142,7 +153,7 @@
     @include bp-tablets-lg {     
       font-size: 30px;
       line-height: 48px;
-      margin-bottom: 45px;
+      margin-bottom: 39px;
     }
     @include tablets { 
       line-height: 36px;
@@ -152,7 +163,10 @@
     opacity: 0.5;
     min-height: 152px;
     @include bp-tablets-lg {     
-      min-height: 109px;
+      min-height: 108px;
+    }
+    @include tablets{
+      margin-bottom: 38px;
     }
     &_italic{
       font-style: italic;

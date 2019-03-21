@@ -1,17 +1,11 @@
+
 .main-nav-list{
   &__item{
     display: inline-block;
     vertical-align: top;
     margin-right: 60px;
-    @include bp-tablets-lg {
-      display: block;
-      margin: 0 0 25px 0;
-    }
     &:last-child{
       margin-right: 0;
-      @include bp-tablets-lg {        
-        margin-bottom: 0;
-      }
     }
     &.active{
       .main-nav-list__link{
@@ -39,6 +33,24 @@
     &:hover{     
       color: $main-color;
     }
+  }
+}
+.main-nav_vertical-tab{
+  @include tablets {
+    margin-bottom: 28px;
+  }
+  .main-nav-list__item{
+    @include bp-tablets-lg {
+      display: block;
+      margin: 0 0 20px 0;
+    }
+    &:last-child{
+      @include bp-tablets-lg {        
+        margin-bottom: 0;
+      }
+    }
+  }
+  .main-nav-list__link{
     @include bp-tablets-lg {
       color: #414c63;
       font-size: 18px;

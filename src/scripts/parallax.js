@@ -1,21 +1,15 @@
 export default (e => {
-  let items = Array.prototype.slice.call(
-    document.querySelectorAll(".js-parallax-item")
-  );
-
-  window.addEventListener("wheel", e => {
-    items.forEach((item, i) => {
-      if (true) {
-        let
-          speed = item.dataset.speed,
-          scrollTop = window.scrollY,
-          currentPosY = window.getComputedStyle(item).top,
-          deffAccel = .33,
-          delta = scrollTop * speed * deffAccel,
-          trs = `translate-y(${-delta}px)`;
-
-        item.style.transform = `translate(0, ${-delta}px)`
-      }
-    });
+  const parallax = document.querySelectorAll(".parallax__layer");
+  function moveItemDependendOnScroll(wScroll) {
+    Array.from(parallax).forEach(parallax => {
+        const divider = parallax.dataset.speed;
+        const strafe  = wScroll * divider / 10;
+        parallax.style.transform = `translateY(${-strafe}%)`;
+    })
+  }
+  window.addEventListener("scroll", e => {
+    const wScroll = window.pageYOffset;
+    moveItemDependendOnScroll(wScroll);
+    console.log(wScroll);
   });
 })();
