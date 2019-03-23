@@ -10,6 +10,5 @@ export default (e => {
   window.addEventListener("scroll", e => {
     const wScroll = window.pageYOffset;
     moveItemDependendOnScroll(wScroll);
-    console.log(wScroll);
   });
 })();

@@ -1,0 +1,63 @@
+script(type="text/x-template")#slider-container
+  .portfolio-row
+    display(
+      :works="works",
+      :currentWork="currentWork",
+      :currentIndex="currentIndex"
+      @slide="hadleSlide"
+    )    
+    info(
+      :currentWork="currentWork"
+    )
+
+script(type="text/x-template")#slider-display
+  .portfolio-row__slider
+    .portfolio-slider        
+      .portfolio-big
+        .portfolio-big__counter {{ currentIndex }}   
+        .portfolio-big__img            
+          img(:src="currentWork.photo" alt="") 
+        .portfolio-slider__btn 
+          btns(
+            @slide="direction => $emit('slide', direction)"
+          )           
+      .portfolio-slider__sm
+        thumbs(
+          :works="works",
+          :currentWork="currentWork"
+        )
+                
+script(type="text/x-template")#slider-thumbs
+  ul.portfolio-sm
+    li.portfolio-sm__item(
+      v-for="(work, index) in works" :key="work.id"
+      :class="{active: currentWork.id === work.id }"
+    )      
+      a.portfolio-sm__link 
+        img(:src="work.photo" alt="") 
+
+script(type="text/x-template")#slider-btns
+  .slider-btn
+    button(@click.prevent="$emit('slide', 'next')").slider-arrow.slider-next
+      +icon('arrow-down', 'arrow-right-icon')
+    button(@click.prevent="$emit('slide', 'prev')").slider-arrow.slider-prev
+      +icon('arrow-down', 'arrow-left-icon')
+
+
+script(type="text/x-template")#slider-info
+  .portfolio-desc
+    .portfolio-desc__tag
+      tags(
+        :tagsArray="tagsArray"
+      )     
+    .portfolio-desc__title {{ currentWork.title }}
+    .portfolio-desc__text
+      p {{ currentWork.desc }}
+    a.portfolio-link(:href="currentWork.link") 
+      +icon('link', 'link-icon')
+      span Посмотреть сайт
+
+script(type="text/x-template")#slider-tags
+  ul.tag-list
+    li.tag-list__item(v-for="tag in tagsArray")
+      .tag-list__title {{tag}}

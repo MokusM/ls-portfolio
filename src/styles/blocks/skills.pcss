@@ -195,25 +195,12 @@
   }
   &__circle_above {
     stroke-width: 5px;
-    //stroke: #ee8200;
+    stroke: #ee8200;
     stroke-dasharray: 251;
-    stroke-dashoffset: 251;
+    stroke-dashoffset: 100;
     animation: fill 100s linear infinite;
     animation-play-state: paused;
     animation-delay: -30s;
     
   }  
-}
-@keyframes fill {
-  from {
-    stroke-dashoffset: 251;
-  }
-
-  to {
-    stroke-dashoffset: 0;
-  }
-}
-.skill__circle_above[style="animation-delay: -100s"] {
-  stroke-dashoffset: 0;
-  animation: initial;
 }

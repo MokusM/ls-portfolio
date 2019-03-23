@@ -7,34 +7,8 @@ section.section-skills
         h2.section-title.section-title_sm.section-title_white.skills-title__title Чем я могу быть полезен вам
         .skills-title__desc
           p Этот сайт я сделал в рамках обучения в Школе онлайн образования LoftSchool. Чуть позже я освежу в нём свой контент. А пока посмотрите, как тут всё классно и красиво!
-      ul.user-skills
-        - 
-          var skills = [
-            ['Front-end', 
-              ['HTML5', 'CSS3', 'Javascript', 'Jquery  и Vue.js']
-            ],
-            ['Workflow', 
-              ['GIT', 'Terminal', 'Gulp', 'Webpack']
-            ],
-          ]
-        each item in skills
-          li.user-skills__item.skills-row
-            h3.skills-row__title #{item[0]}
-            ul.skills-list
-              each skill in item[1]           
-                li.skills-list__item
-                  .skill
-                    .skill__circle-wrap
-                      svg(viewBox="0 0 74 74" preserveAspectRatio="none").skill__shape
-                        circle(
-                          cx="37" cy="37" r="34"
-                        ).skill__circle.skill__circle_under 
-                        defs
-                          lineargradient#gradient(x1='0%', y1='0%', x2='0%', y2='100%')
-                            stop(offset='0%', stop-color='#ed7e00')
-                            stop(offset='100%', stop-color='#f29400')
-                        circle(cx="37" cy="37" r="34", stroke='url(#gradient)', fill='none', style='animation-delay: -30s').skill__circle.skill__circle_above 
-                      .skill__title #{skill}   
-      .hands-img-tablet
-        +image('content/hands-img-tablet.png')
+      #skills-component
+  .hands-img-tablet
+      +image('content/hands-img-tablet.png')
+      
          
