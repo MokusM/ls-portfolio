@@ -1,5 +1,6 @@
 import Vue from 'vue';
 
+
 const btns = {
   template: "#slider-btns"
 }
@@ -52,7 +53,7 @@ new Vue({
     display,
     info
   },
-  data() {
+  data() { 
     return {
       works: [],
       currentIndex: 0
@@ -88,8 +89,11 @@ new Vue({
           break;
         case 'prev' :
           this.currentIndex--;
-          break;       
+          break;              
       }
+    },
+    activateImage(imageIndex) {
+      this.currentIndex = parseInt(imageIndex);
     }
   },
   created() {

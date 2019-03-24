@@ -16,10 +16,12 @@
   position: absolute;
   left: 0;
   bottom: -78px;
-  max-width: 650px;
+  width: 650px;
+  max-width: 38%;
   @include desktop {
-    max-width: 490px;
+   width: 490px;
     left: -95px;
+    max-width: 38%;
   }
   img{
     display: block;
@@ -48,9 +50,9 @@
 }
 .box-skills{
   color: #fff;
-  padding-left: 505px;
+  padding-left: 28.3%;
   @include desktop {
-    padding-left: 278px;
+    padding-left: 17%;
   }
   @include bp-tablets-lg {     
     padding-left: 0;
@@ -91,6 +93,9 @@
     max-width: 270px;
     margin: 0 auto 0px;
   }
+  @include tablets {
+    max-width: 100%;
+  }
 }
 .skills-title__desc{
   p{
@@ -106,6 +111,9 @@
       max-width: 430px;
       margin: 0 auto;
       padding: 2px 0;
+    }
+    @include tablets {
+      max-width: 100%;
     } 
   }
 }
@@ -131,6 +139,11 @@
   @include bp-tablets-lg {     
     text-align: center;
   }
+  @include tablets {
+    max-width: 280px;
+    margin-left: auto;
+    margin-right: auto;
+  } 
   &__item{
     display: inline-block;
     vertical-align: top;

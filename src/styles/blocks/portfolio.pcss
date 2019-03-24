@@ -59,6 +59,9 @@
 .portfolio-row__slider{
   padding-right: 110px;
   width: calc(100% - 347px);
+  @include desktop {
+    padding-right: 60px;
+  }
   @include bp-tablets-lg {     
     width: 100%;
     margin-bottom: 63px;
@@ -90,8 +93,11 @@
     right: 0;
     bottom: 60px;
     z-index: 6;
+    max-width: 700px;
+    overflow: hidden;
     @include desktop {
       bottom: 30px;
+      max-width: 534px;
     }
     
   }
@@ -199,18 +205,20 @@
     display: none;
   }
   &__item{
+    position: relative;
     &.active{     
       position: relative;
-      &:before{
+      .portfolio-sm__link:after{
         border: 3px solid #f29400;
         content: '';
         display: block;
         position: absolute;
-        left: -3px;
-        top: -3px;
-        width: 100%;
-        height: 100%;
+        left: 0px;
+        top: 0px;
+        width: calc(100% - 6px);
+        height: calc(100% - 6px);
         z-index: 4;
+        
       }
     }
     &.hidden-tablet{
@@ -337,15 +345,16 @@
   vertical-align: middle;
   margin-right: 19px;
 }
-
-.fade-enter-active {
-  transition: opacity 3s ease-in-out;
+.fade-leave-active{
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .9s;
 }
 
-.fade-enter-to {
-  opacity: 1;
-}
-
-.fade-enter {
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */
+{
   opacity: 0;
 }

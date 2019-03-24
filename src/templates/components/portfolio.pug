@@ -3,8 +3,9 @@ script(type="text/x-template")#slider-container
     display(
       :works="works",
       :currentWork="currentWork",
-      :currentIndex="currentIndex"
-      @slide="hadleSlide"
+      :currentIndex="currentIndex",
+      @slide="hadleSlide",
+      @activateImage="activateImage"
     )    
     info(
       :currentWork="currentWork"
@@ -15,8 +16,9 @@ script(type="text/x-template")#slider-display
     .portfolio-slider        
       .portfolio-big
         .portfolio-big__counter {{ currentIndex }}   
-        .portfolio-big__img            
-          img(:src="currentWork.photo" alt="") 
+        .portfolio-big__img 
+          transition(name="fade")          
+            img(:src="currentWork.photo" alt="" :key="currentWork.photo") 
         .portfolio-slider__btn 
           btns(
             @slide="direction => $emit('slide', direction)"
@@ -24,16 +26,17 @@ script(type="text/x-template")#slider-display
       .portfolio-slider__sm
         thumbs(
           :works="works",
-          :currentWork="currentWork"
+          :currentWork="currentWork",
+          @activateImage="imageIndex => $emit('activateImage', imageIndex)"
         )
                 
 script(type="text/x-template")#slider-thumbs
   ul.portfolio-sm
     li.portfolio-sm__item(
-      v-for="(work, index) in works" :key="work.id"
+      v-for="(work, index) in works" :key="index"
       :class="{active: currentWork.id === work.id }"
     )      
-      a.portfolio-sm__link 
+      a.portfolio-sm__link(@click.prevent="$emit('activateImage', index)")
         img(:src="work.photo" alt="") 
 
 script(type="text/x-template")#slider-btns

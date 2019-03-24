@@ -16,8 +16,6 @@ new Vue({
         pageDots: false,
         wrapAround: true,
         cellAlign: 'left'
-        
-        // any options from Flickity can be used
       }
     }
   },
@@ -30,15 +28,12 @@ new Vue({
         return item;
       })
     },
-    slide(direction) {
-      switch (direction) {
-        case "next":
-          this.$refs.flickity.next();
-          break;
-        case "prev":
-          this.$refs.flickity.previous();
-          break;       
-      }
+    next() {
+      this.$refs.flickity.next();
+    },
+    
+    previous() {
+      this.$refs.flickity.previous();
     }
   },
   created() {
