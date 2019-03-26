@@ -3,18 +3,28 @@
 	width:100%;
 	background-color: $footer-bg;
 	padding:73px 0;
+	@include bp-tablets-lg {
+		padding:60px 0;
+	}
 	p{
 		opacity: 0.3;
 		color: white;
 		font-size: 16px;
 		font-weight: 400;
 		line-height: 30px;
+		@include bp-tablets-lg {
+			font-size: 14px;
+			line-height: 24px;
+		}
 	}
 }
 .wrapper-flex-top{
 	display: flex;
 	align-items: flex-start;
 	justify-content: space-between;
+	@include tablets {
+		display: block;
+	}
 }
 .footer__left{
 	display: flex;
@@ -23,6 +33,11 @@
 		display: block;
 		width: 25.7%;
 	} 
+	@include tablets {
+		width: 100% ;
+		padding-left: 0;
+		margin-bottom: 40px;
+	}
 }
 .footer__left-author{
 	max-width: 185px;
@@ -31,12 +46,23 @@
 		padding-left: 0;
 		padding-top: 12px;
 	} 
+	@include tablets {
+		max-width: 100%;
+		padding-top: 16px;
+	}
 }
 .footer__right{
 	width: 65.9%;
 	@include desktop {
 		width: 74.7%;
 	} 
+	@include bp-tablets-lg {
+		padding-left: 59px;
+	}
+	@include tablets {
+		width: 100% ;
+		padding-left: 0;
+	}
 }
 .copyright{
 	opacity: 0.1;
@@ -57,6 +83,9 @@
 		line-height: 30px;
 		text-transform: uppercase;
 		margin-bottom: 18px;
+		@include tablets {			
+			margin-bottom: 6px;
+		}
 	}
 	&__prof{
 		opacity: 0.15;
@@ -64,24 +93,60 @@
 		font-size: 16px;
 		font-weight: 400;
 		line-height: 30px;
+		@include bp-tablets-lg {
+			font-size: 14px;
+			line-height: 24px;
+		}
 	}
 }
 .footer__nav{
 	margin-bottom: 55px;
+	@include bp-tablets-lg {
+		margin-bottom: 34px;
+	}
+	@include tablets {
+		margin-bottom: 20px;
+	}
+	.main-nav-list__item{
+		@include bp-tablets-lg {
+			margin-bottom: 17px;
+			margin-right: 58px;
+		}
+		@include tablets {
+			margin-right: 00px;
+			width: 50%;
+		}
+	}
+	.main-nav-list__link{
+		@include bp-tablets-lg {
+			font-size: 14px;
+		}
+	}
 }
 .footer__social{
 	margin-top: 24px;
+	@include bp-tablets-lg {
+		margin-top: 15px;
+		margin-bottom: 55px;
+	}
+	@include tablets {
+		margin-bottom: 44px;
+	}
 	.social-list__item{
 		margin-right: 18px;
 		&:last-child{
 			margin-right: 0;
 		}
-	}
+	}	
 }
 .footer-bottom{
 	display: flex;
 	justify-content: space-between;
 	align-items: flex-start;
+	@include bp-tablets-lg {
+		display: block;
+	}
+	
 }
 .footer-bottom__left{
 	max-width: 351px;
@@ -96,10 +161,20 @@ blockquote{
 }
 .blockquote__text{
 	margin-bottom: 17px;
+	@include bp-tablets-lg {
+		margin-bottom: 8px;
+	}
+	@include tablets {
+		margin-bottom: 20px;
+	}
 }
 .quote-author{
 	color: white;
 	font-size: 16px;
 	font-style: italic;
 	line-height: 30px;
+	@include bp-tablets-lg {
+		font-size: 14px;
+		line-height: 24px;
+	}
 }

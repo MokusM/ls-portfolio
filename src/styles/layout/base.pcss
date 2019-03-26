@@ -1,5 +1,5 @@
 html {
- 
+ font-size: 15px;
 }
 body,
 html {
@@ -106,9 +106,61 @@ img {
     padding: 0 30px;
   }
 }
+.parallax{
+  position: absolute;
+  overflow: hidden;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  &__layer{
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    will-change: transform;
+    @include desktop-sm {
+      display: none;
+    }
+    &_1{
+      .parallax__image{
+        top: 0;
+        width: 100%;
+        height: auto;
+      }
+    }
+    &_2{
+      .parallax__image{
+        top: 395px;
+        width: 100%;
+        height: auto;
+      }
+    }
+    &_3{
+      .parallax__image{
+        top: 8px;
+        width: 100%;
+        height: auto;
+      }
+    }
+    &_4{
+      .parallax__image{
+        bottom: -30px;
+        width: 100%;
+        height: auto;
+      }
+    }
+  }
+  &__image{    
+    position: absolute;
+    bottom: -400px;
+    min-width: 1700px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
 
 .main-screen{
-  background-image: url(../images/content/main-screen-top.jpg);
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center bottom;
@@ -116,6 +168,9 @@ img {
   height: 100vh;
   min-height: 650px;
   position: relative;
+  @include desktop-sm {
+    background-image: url(../images/content/main-screen-top.jpg);
+  }
   @include desktop {
     margin-bottom: 540px;
   }
@@ -124,6 +179,10 @@ img {
     min-height: 605px;
     margin-bottom: 390px;
   }
+  @include tablets {
+   margin-bottom: 0;
+  }
+  
   &__wrapper{
     display: flex;
     flex-direction: column;
@@ -135,6 +194,9 @@ img {
     }
     @include bp-tablets-lg {     
      padding-bottom: 125px;
+    }
+    @include tablets {
+      padding-top: 107px;
     }
   }
   &__text{
@@ -149,6 +211,10 @@ img {
     @include bp-tablets-lg {     
       padding-right: 0;
     }
+    @include tablets {
+      z-index: 2;
+    }
+    
   }
   &__btn{
     display: flex;
@@ -158,16 +224,19 @@ img {
     }
   }
 }
-.main-screen-bg{
-  background-image: url(../images/content/main-screen-bottom.png);
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center top;
+.main-screen-bg{  
   position: absolute;
   left: 0;
   width: 100%;
   top: 52vh;
   height: calc(100% - 52vh + 750px);
+  z-index: 5;
+  @include desktop-sm {  
+    background-image: url(../images/content/main-screen-bottom.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: top;
+  }
   @include desktop {
     height: calc(100% - 52vh + 540px);
   }
@@ -175,30 +244,45 @@ img {
     top: 350px;
     height: calc(100%  + 42px);
   }
+  @include tablets {
+    top: 180px;
+    height: calc(100% - 180px);
+    z-index: 1;
+  }
   &:before{
     content: "";
     display: block;
     position: absolute;
     left: 0;
-    bottom: 0;
+    bottom: -3px;
     width: 100%;
     background-image: linear-gradient(to top, #1b1f22 0%, transparent 100%);
-    height: 336px;
+    height: 456px;
+    z-index: 8;
+    @include tablets {
+      height: 150px;
+    }
   }
   &:after{
     content: "";
     display: block;
     position: absolute;
     left: 0;
-    bottom: 0;
+    bottom: -3px;
     width: 100%;
     background-image: linear-gradient(to top, #1b1f22 0%, transparent 100%);
-    height: 740px;
+    height: 840px;
+    z-index: 9;
+    @include tablets {
+      height: 340px;
+    }
   }
 }
 .user-info{
   display: flex;
   align-content: flex-start;
+  position: relative;
+  z-index: 4;
   @include bp-tablets-lg {     
     display: block;
     text-align: center;
@@ -218,6 +302,11 @@ img {
       font-size: 16px;
       line-height: 30px;
     }
+    @include tablets {
+      font-size: 14px;
+      line-height: 24px;
+      margin-bottom: 4px;
+    }
   }
   &__name{
     color: white;
@@ -236,6 +325,9 @@ img {
     @include bp-tablets-lg {     
       font-size: 48px;
       line-height: 48px;
+    }
+    @include tablets {
+      font-size: 36px;
     }
   }
 }
@@ -284,6 +376,13 @@ img {
     color: white;
   }
   @include tablets{
+    font-size: 24px;
+    line-height: 36px;
+  }
+  @include bp-tablets-lg {
+    font-size: 30px;
+  }
+  @include tablets {
     font-size: 24px;
     line-height: 36px;
   }

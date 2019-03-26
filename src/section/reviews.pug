@@ -1,46 +1,15 @@
 section.section-reviews  
-  .leaves-img.leaves-img_1
+  div(data-speed="80").leaves-img.leaves-img_1.js-parallax-item
     +image('content/leaves-1.png')
-  .leaves-img.leaves-img_2
+  div(data-speed="31").leaves-img.leaves-img_2.js-parallax-item
     +image('content/leaves-2.png')
-  .leaves-img.leaves-img_3
+  div(data-speed="20").leaves-img.leaves-img_3.js-parallax-item
     +image('content/leaves-3.png')
-  .leaves-img.leaves-img_4
+  div(data-speed="60").leaves-img.leaves-img_4.js-parallax-item
     +image('content/leaves-4.png')
   .wrapper
-    .row-with-btn.section-reviews__title
-      h2.section-title.section-title_white Что обо мне говорят
-      .slider-btn.slider-btn_horizontal.section-reviews__btns
-        button.slider-arrow.slider-prev.slider-arrow_round
-          +icon('arrow-down', 'arrow-left-icon')
-        button.slider-arrow.slider-next.slider-arrow_round
-          +icon('arrow-down', 'arrow-right-icon')
-    .section-reviews__slider
-      .reviews-slider
-        .reviews-slider__item
-          .reviews-slider__cont
-            +icon('quote', 'quote-icon')
-            .reviews-slider__desc
-              p Этот парень проходил обучение веб-разработке не где-то, а в LoftSchool! 4,5 месяца только самых тяжелых испытаний и бессонных ночей!
-            .reviews-author.reviews-slider__author
-              .reviews-author__img
-                +image('content/reviews-1.jpg', 'author-avatar')
-              .reviews-author__text
-                .reviews-author__name Ковальчук Дмитрий
-                .reviews-author__prof Основатель Loftschool
-        .reviews-slider__item
-          .reviews-slider__cont
-            .reviews-slider__quote
-              +icon('quote', 'quote-icon')
-            .reviews-slider__desc
-              p Этот парень проходил обучение веб-разработке не где-то, а в LoftSchool! 4,5 месяца только самых тяжелых испытаний и бессонных ночей!
-            .reviews-author.reviews-slider__author
-              .reviews-author__img
-                +image('content/reviews-2.jpg', 'author-avatar')
-              .reviews-author__text
-                .reviews-author__name Владимир Сабанцев
-                .reviews-author__prof Преподаватель
-    h2.section-title.section-title_white.section-reviews__title Связаться со мной
+    #reviews-slider  
+    h2.section-title.section-title_white.section-reviews__title.section-reviews__form-title Связаться со мной
     .box-form.section-reviews__form
       form
         .box-field__row

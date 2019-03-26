@@ -2,8 +2,9 @@ header.header
   .header__wrapper.wrapper
     a.logo(href="#", title="Логотип Портфолио")
       +image('content/logo.png', 'logo-pic')
-    .header__nav      
-      +nav('main-nav', ["Главная", "Обо мне", "Навыки" , "Работы", "Отзывы", "Связаться"])
+    .header__nav     
+      +nav('main-nav_vertical-tab main-nav', ["Главная", "Обо мне", "Навыки" , "Работы", "Отзывы", "Связаться"])
+      +list-link('social_mob social', ["insta", "vk", "github"], 'social-icon')
     .header__links
       +list-link('social', ["insta", "vk", "github"], 'social-icon')
     .header__mob-button

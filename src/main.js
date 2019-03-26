@@ -4,8 +4,12 @@ if (process.env.NODE_ENV === "development") {
 }
 
 import "./scripts/skills";
+import "./scripts/portfolio";
+import "./scripts/reviews";
 import "./scripts/header";
 import "./scripts/parallax";
+
+
 
 
 let navBtn = document.querySelector('.button-nav');

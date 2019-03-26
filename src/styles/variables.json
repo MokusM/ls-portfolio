@@ -5,7 +5,8 @@
   "footer-bg": "#1b1f22",
   "bp-desktop-hd": "1800px",
   "bp-desktop": "1400px",
+  "bp-desktop-sm": "1200px",
   "bp-tablets-lg": "1023px",
-  "bp-tablets": "768px",
-  "bp-phones": "480px"
+  "bp-tablets": "767px",
+  "bp-phones": "479px"
 }
