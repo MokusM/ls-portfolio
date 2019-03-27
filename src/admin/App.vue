@@ -3,15 +3,23 @@
     <Header />
     <Tabs />
     <router-view />
+    <!--<Login v-if="auth"/> -->   
 </template>
 
 <script>
 import Header from "./components/Header";
 import Tabs from "./components/tabs";
+import Login from "./components/Login";
   export default {
+    data() {
+      return{
+        auth: false
+      }
+    },
     components: {
       Header,
-      Tabs
+      Tabs,
+      Login
     }
   }
 

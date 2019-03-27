@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "webpack-dev-server --mode=development --hot",
     "build": "rm -rf dist && webpack --mode=production --progress",
-    "reg": "node reg-util.js"
+    "reg": "node reg-util.js",
+    "svg": "vsvg -s ./src/admin/assets/icons -t ./src/admin/assets/svg-icons/"
   },
   "keywords": [],
   "author": "",
@@ -39,6 +40,7 @@
     "svgo-loader": "^2.2.0",
     "terser-webpack-plugin": "^1.2.3",
     "vue-loader": "^15.6.4",
+    "vue-svgicon": "^3.2.4",
     "vue-template-compiler": "^2.6.7",
     "webpack": "^4.29.5",
     "webpack-cli": "^3.2.3",
