@@ -241,16 +241,24 @@
   }
   &__input{
     position: relative;
-    overflow: hidden;
     cursor: pointer;
     &:hover{
-      .bottom-line{
-        left: 0;
-      }
       svg{
         fill: #ff9a00;
         opacity: 1;
       }
+    }
+  }
+  &.has-error{
+    .form-control{
+      border-bottom-color: #fb0000;
+    }
+    svg{
+      fill: #fb0000;
+      opacity: 1;
+    }
+    .input-error{
+      display: block;
     }
   }
 }
@@ -272,14 +280,13 @@
   }
   &:focus{
     outline: none;
+    border-bottom-color: #ff9a00;
     &+.bottom-line{
       left: 0;
     }
   }
   &:active{
-    &+.bottom-line{
-      left: 0;
-    }
+    border-bottom-color: #ff9a00;
   }
   &:-moz-placeholder,
 	&::-moz-placeholder{
@@ -302,6 +309,7 @@
   background-color: #ff9a00;
   transition: all 0.3s;
   left: -100%;
+  display: none;
 }
 textarea.form-control{
   resize: none;
@@ -316,6 +324,35 @@ textarea.form-control{
   @include tablets {     
    padding-top: 14px;
    height: 101px;
+  }
+}
+.input-error{
+  height: 50px;
+  background-color: #cd1515;
+  color: white;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 18px;
+  display: block;
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  padding: 15px 25px 0;
+  white-space: nowrap;
+  display: none;
+  &:before{
+    content: '';
+    width: 0; 
+    height: 0; 
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;    
+    border-bottom: 10px solid #cd1515;
+    position: absolute;
+    top: -8px;
+    left: 50%;
+    margin-left: -5px;
   }
 }
 
@@ -431,3 +468,4 @@ textarea.form-control{
 .flickity-viewport{
   width: 100%;
 }
+

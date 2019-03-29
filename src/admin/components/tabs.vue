@@ -24,7 +24,6 @@ export default {
 .tabs-list{
   display: flex;
   list-style: none;
-  padding: 0px 39px ;
 }
 .tabs-list__link{
   color: #414c63;
@@ -36,11 +35,11 @@ export default {
   padding: 19px 30px 18px;
   border-bottom: 3px solid transparent;
   &.is-active{
-    color: #383bcf;
-    border-bottom: 3px solid #383bcf;
+    color: #ea7400;
+    border-bottom: 3px solid #ea7400;
   }
   &:hover{
-    color: #383bcf;
+    color: #ea7400;
   }
 }
 

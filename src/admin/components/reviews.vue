@@ -134,7 +134,7 @@ export default {
   .add-item{    
     &__link{
       background-color: white;
-      background-image: linear-gradient(to right, #006aed 0%, #3f35cb 100%);
+      background-image: linear-gradient(90deg,#ea7400 0,#f29400);
       box-shadow:  0 0;
       text-align: center;      
       width: 100%;

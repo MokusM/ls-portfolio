@@ -3,7 +3,7 @@
     <Header />
     <Tabs />
     <router-view />
-    <!--<Login v-if="auth"/> -->   
+    <Login v-if="auth"/>   
 </template>
 
 <script>
@@ -28,6 +28,7 @@ import Login from "./components/Login";
 <style>
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800');
 @import "normalize.css";
+@import "../styles/mixins.pcss";
 html {
  font-size: 16px;
 }

@@ -2,31 +2,50 @@
   .addreviews 
     .addreviews__title Редактирование работы
     .addreviews__form 
-      form.reviews-form
-        .reviews-form__avatar
-          .avatar 
-          div Добавить фото
-        .reviews-form__main          
+      form.reviews-form.works-form
+        .works-form__file
+          .upload-file 
+            .upload-file__title Перетащите или загрузите для загрузки изображения
+            span.btn.btn-orange ЗАГРУЗИТЬ 
+            input(type="file")
+        .reviews-form__main
           .box-field
             label.box-field__label Название
             .box-field__input
-              input.form-control(type="text", value="Ковальчук Дмитрий" required)
+              input.form-control(type="text", value="Дизайн сайта для авто салона Porsche" required)
               span.bottom-line
           .box-field
             label.box-field__label Ссылка
             .box-field__input              
-              input.form-control(type="text", value="Основатель LoftSchool" required)
+              input.form-control(type="text", value="https://www.porsche-pulkovo.ru" required)
               span.bottom-line
           .box-field
             label.box-field__label Описание
             .box-field__input
-              textarea.form-control(placeholder="Требуется ваша помощь в создании сайта. Интересуют сроки и цена вопроса")
+              textarea.form-control(placeholder="Порше Центр Пулково - является официальным дилером марки Порше ")
               span.bottom-line
-          .box-field
+          .box-field.box-field_mb20
             label.box-field__label Добавление тэга
             .box-field__input              
-              input.form-control(type="text", value="Основатель LoftSchool" required)
+              input.form-control(type="text", value="Jquery, Vue.js, HTML5" required)
               span.bottom-line
+          ul.tag-list.tag-list-with-remove
+            li.tag-list__item
+              .tag-list__title 
+                span HTML
+                a(href="#").tag-list__remote
+                  svgicon(icon="remove", width="11", height="11", color="#414c63")
+            li.tag-list__item
+              .tag-list__title 
+                span CSS
+                a(href="#").tag-list__remote
+                  svgicon(icon="remove", width="11", height="11", color="#414c63")
+            li.tag-list__item
+              .tag-list__title 
+                span Javascript
+                a(href="#").tag-list__remote
+                  svgicon(icon="remove", width="11", height="11", color="#414c63")
+
           .box-field-btn
             input.btn.btn-orange(type="submit", value="Сохранить")
 
@@ -36,6 +55,7 @@
 </template>
 
 <script>
+  import '../assets/svg-icons/remove';
 export default {
   name: "addworks"
 };
@@ -43,152 +63,73 @@ export default {
 </script>
 
 <style lang="postcss">
-.addreviews {
-  margin-bottom: 30px;
-  background-color: white;
-  box-shadow: 4.1px 2.9px 20px rgba(0, 0, 0, 0.07);
-  padding: 20px;
-  &__title{
-    color: #414c63;
-    font-size: 18px;
-    font-weight: 700;
-    line-height: 34px;
-    border-bottom: 1px solid rgba(31,35,45,0.15);
-    padding: 0 8px 20px;
-    margin-bottom: 45px;
+.works-form{
+  padding: 0 10px;
+  &__file{
+    width: 50%;
+    padding-right: 15px;
+  }
+  .reviews-form__main{
+    width: 50%;
+    padding-left: 15px;
+  }
+  .box-field{
+    margin-bottom: 25px;
+  }
+  .box-field_mb20{
+    margin-bottom: 20px;
+  }
+  textarea.form-control{
+    height: 145px;
+  }
+  .box-field-btn{
+    padding-top: 40px;
+    padding-block-end: 10px;
   }
 }
-.reviews-form{
-  display: flex;
-  &__avatar{
-    width: 240px;
-  }
-  &__main{
-    width: calc(100% - 240px);
-    max-width: 611px;
-  }
-}
-.avatar{
-  width: 200px;
-  height: 200px;
+.upload-file {
+  height: 276px;
   background-color: #dee4ed;
-  border-radius: 50%;
-  margin: 5px 11px 22px;
-}
-.box-field{
-  &__label{
+  border: 1px dashed #a1a1a1;
+  text-align: center;
+  padding: 77px 10px 0;
+  position: relative;
+  &__title{
     opacity: 0.5;
     color: #414c63;
     font-size: 16px;
     font-weight: 600;
-    line-height: 22px;
-    margin-bottom: -2px;
-    display: block;
+    line-height: 34px;
+    max-width: 230px;
+    margin: 0 auto 19px;
   }
-  &__row{
+  input{
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    z-index: 2; 
+  }
+  .btn-orange{
+    height: 50px;
+    border-radius: 25px;
+  }
+}
+.tag-list-with-remove{
+  .tag-list__title{
+    background-color: #f4f4f4;
     display: flex;
-    margin: 0 -15px 35px;
-    .box-field{
-      padding: 0 15px;
-      margin-bottom: 0;
-      width: 50%;
-    }
-  }
-  &__input{
-    position: relative;
-    overflow: hidden;
-    cursor: pointer;
-    &:hover{
-      .bottom-line{
-        left: 0;
-      }
-    }
+    align-items: center;
+    padding: 5px 10px 5px 18px;
   }
 }
-.form-control{
-  background-color: transparent;
-  border: none;
-  color: #414c63;
-  font-size: 16px;
-  font-weight: 600;
-  line-height: 47px;
-  height: 53px;
-  width: 100%;  
-  border-bottom: 1px solid rgba(0,0,0,1);
-  padding: 0 0 0 0px; 
-  font-family: "Open Sans", sans-serif;
-  &:focus{
-    outline: none;
-    &+.bottom-line{
-      left: 0;
-    }
-  }
-  &:active{
-    &+.bottom-line{
-      left: 0;
-    }
-  }
-  &:-moz-placeholder,
-	&::-moz-placeholder{
-		color: white;
-		opacity: 1;
-	}
-	&::-webkit-input-placeholder{
-		color: white;
-	}
-	&:-ms-input-placeholder{
-    color: white;
-		opacity: 1;
-	}
-}
-.bottom-line{
-  position: absolute;
-  width: 100%;
-  bottom: 0;
-  height: 1px;
-  background-color: #ff9a00;
-  transition: all 0.3s;
-  left: -100%;
-}
-textarea.form-control{
-  margin-top: 16px;
-  resize: none;
-  height: 116px;
-  padding: 15px 20px 7px;
+.tag-list__remote{
+  width: 12px;
+  height: 12px;
   display: block;
-  line-height: 24px;
-  border: 1px solid rgba(65,76,99,0.2);
-}
-
-
-.box-field-btn{
-  padding-top: 29px; 
-  padding-bottom: 29px;    
-  text-align: right;
-}
-.btn{
-  display: inline-block;
-  vertical-align: top;
-}
-.btn-orange{
-  width: 100%;
-  max-width: 181px;
-  height: 60px;
-  border-radius: 30px;
-  background-color: white;
-  background-image: linear-gradient(to right, #ea7400 0%, #f29400 100%);
-  text-align: center;
-  color: white;
-  font-size: 16px;
-  font-weight: 700;
-  line-height: 48px;
-  text-transform: uppercase;
-  border: none;
-  transition: all 0.5s;
-  cursor: pointer;
-  &:hover{
-    background-image: linear-gradient(to right, #ff7f00 0%, #ff9d00 100%);
-  }
+  margin-left: 10px;
 }
 </style>
   

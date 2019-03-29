@@ -105,7 +105,7 @@
   right: 10px;
 }
 .work-link{
-  color: #383bcf;
+  color: #ea7400;
   font-size: 16px;
   font-weight: 600;
   line-height: 30px;
