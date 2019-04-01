@@ -3,7 +3,7 @@
     <Header />
     <Tabs />
     <router-view />
-    <Login v-if="auth"/>   
+    <Login :cancel="cancelModal" v-if="auth"/>   
 </template>
 
 <script>
@@ -13,13 +13,18 @@ import Login from "./components/Login";
   export default {
     data() {
       return{
-        auth: false
+        auth: true
       }
     },
     components: {
       Header,
       Tabs,
       Login
+    },
+    methods: {
+      cancelModal () {
+        this.auth = false;
+      }
     }
   }
 
@@ -100,6 +105,12 @@ img {
   max-width: 1570px;
   margin: 0 auto;
   padding:  0 60px;
+  @include bp-tablets-lg{
+    padding: 0 30px;
+  }
+  @include tablets{
+    padding: 0 20px;
+  }
 }
 
 

@@ -4,26 +4,26 @@
     .addreviews__form 
       form.reviews-form
         .reviews-form__avatar
-          .avatar 
-          div Добавить фото
+          .upload-avatar
+            .upload-avatar__img
+              .upload-avatar__icon
+            .upload-avatar__link Добавить фото
         .reviews-form__main
           .box-field__row
             .box-field
               label.box-field__label Имя автора
               .box-field__input
                 input.form-control(type="text", value="Ковальчук Дмитрий" required)
-                span.bottom-line
             .box-field
               label.box-field__label Титул автора
               .box-field__input              
                 input.form-control(type="text", value="Основатель LoftSchool" required)
-                span.bottom-line
           .box-field
             label.box-field__label Отзыв
             .box-field__input
               textarea.form-control(placeholder="Требуется ваша помощь в создании сайта. Интересуют сроки и цена вопроса")
-              span.bottom-line
           .box-field-btn
+            a(type="#").cancel-form Отмена
             input.btn.btn-orange(type="submit", value="Сохранить")
 
   
@@ -39,11 +39,19 @@ export default {
 </script>
 
 <style lang="postcss">
+    @import "../../styles/mixins.pcss";
 .addreviews {
   margin-bottom: 30px;
   background-color: white;
   box-shadow: 4.1px 2.9px 20px rgba(0, 0, 0, 0.07);
   padding: 20px;
+  @include bp-tablets-lg {     
+    padding-right: 30px;
+  }
+  @include tablets{
+    margin: 0 -20px;
+    padding: 0 0 27px;
+  }
   &__title{
     color: #414c63;
     font-size: 18px;
@@ -52,24 +60,72 @@ export default {
     border-bottom: 1px solid rgba(31,35,45,0.15);
     padding: 0 8px 20px;
     margin-bottom: 45px;
+    @include tablets{
+      padding: 8px 20px 20px;
+      margin-bottom: 29px;
+      font-size: 16px;
+    }
   }
 }
 .reviews-form{
   display: flex;
+  @include tablets{
+    display: block;
+    padding: 0 20px;
+  }
   &__avatar{
     width: 240px;
+    @include tablets{
+      margin: 0 auto;
+    }
   }
   &__main{
     width: calc(100% - 240px);
     max-width: 611px;
+    @include tablets{
+      width: 100%;
+    }
   }
 }
-.avatar{
-  width: 200px;
-  height: 200px;
-  background-color: #dee4ed;
-  border-radius: 50%;
-  margin: 5px 11px 22px;
+.upload-avatar{
+  text-align: center;
+  @include tablets{
+    margin-bottom: 35px;
+  }
+  &__img{
+    width: 200px;
+    height: 200px;
+    background-color: #dee4ed;
+    border-radius: 50%;
+    margin: 5px 11px 16px;
+    position: relative;
+    @include tablets{
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+  &__icon{
+    background: svg-load('user.svg', fill=#fff, width=100%, height=100%);
+    width: 85px;
+    height: 113px;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: contain;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+  }
+  &__link{
+    color: #383bcf;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 34px;
+    padding-right: 17px;
+    @include tablets{
+      padding-right: 0;
+    }
+  } 
 }
 .box-field{
   &__label{
@@ -80,24 +136,40 @@ export default {
     line-height: 22px;
     margin-bottom: -2px;
     display: block;
+    @include tablets{
+      font-size: 14px;
+    }
   }
   &__row{
     display: flex;
     margin: 0 -15px 35px;
+    @include bp-tablets-lg {     
+      margin: 0 0 30px 0;
+      display: block;
+    }
+    @include tablets{
+      margin: 0 0 24px 0;
+    }
     .box-field{
       padding: 0 15px;
       margin-bottom: 0;
       width: 50%;
+      max-width: 290px;
+      @include bp-tablets-lg {     
+        padding: 0;
+        margin: 0 0 35px 0;
+        width: 100%;
+      }
+      @include tablets{
+        margin: 0 0 24px 0;
+      }
     }
   }
   &__input{
     position: relative;
-    overflow: hidden;
     cursor: pointer;
     &:hover{
-      .bottom-line{
-        left: 0;
-      }
+
     }
   }
 }
@@ -113,6 +185,9 @@ export default {
   border-bottom: 1px solid rgba(0,0,0,1);
   padding: 0 0 0 0px; 
   font-family: "Open Sans", sans-serif;
+  @include tablets{
+    font-size: 14px;
+  }
   &:focus{
     outline: none;
     &+.bottom-line{
@@ -154,13 +229,36 @@ textarea.form-control{
   display: block;
   line-height: 24px;
   border: 1px solid rgba(65,76,99,0.2);
+  @include bp-tablets-lg {     
+    height: 148px;
+  }
 }
-
+.cancel-form{
+  color: $main-color;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+  @include tablets{
+    font-size: 14px;
+  }
+}
 
 .box-field-btn{
   padding-top: 29px; 
   padding-bottom: 29px;    
   text-align: right;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  .btn{
+    margin-left: 57px;
+    @include tablets{
+      margin-left: 25px;
+    }
+  }
+  @include bp-tablets-lg {     
+    padding-bottom: 14px;
+  }
 }
 .btn{
   display: inline-block;
@@ -182,6 +280,9 @@ textarea.form-control{
   border: none;
   transition: all 0.5s;
   cursor: pointer;
+  @include tablets{
+    font-size: 14px;
+  }
   &:hover{
     background-image: linear-gradient(to right, #ff7f00 0%, #ff9d00 100%);
   }

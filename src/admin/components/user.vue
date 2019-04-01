@@ -19,6 +19,7 @@ export default {
 </script>
 
 <style lang="postcss">
+@import "../../styles/mixins.pcss";
 .user{
   display: flex;
   align-items: center;
@@ -39,6 +40,11 @@ export default {
     font-weight: 600;
     line-height: 24px;
     padding-left: 19px;
+    @include tablets{
+      font-size: 16px;
+      padding-left: 10px;
+      padding-bottom: 24px;
+    }
   }
 }
 </style>
