@@ -65,24 +65,15 @@ export default {
     async login() {
       if ((await this.$validate()) === false) return;
       this.disableSubmit = true;
-
       try {
         axios
-          .post("http://webdev-api.loftschool.com/login", {
+          .post("https://webdev-api.loftschool.com/login", {
             name: this.user.name,
             password: this.user.password
           })
           .then(responce => {
-            /*const report = JSON.stringify(responce, null, 2);
-            console.log(report);*/
-            responce.header("Access-Control-Allow-Origin", "*");
-            responce.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-            const token = responce.data.token
-            localStorage.setItem('user-token', token) // store the token in localstorage
-            //commit(AUTH_SUCCESS, token)
-            // you have your token, now log in your user :)
-           // dispatch(USER_REQUEST)
-            resolve(responce)
+            const report = JSON.stringify(responce, null, 2);
+            console.log(report);
           });
       } catch (error) {
          console.log(error)
