@@ -27,7 +27,7 @@
           input.btn.btn-orange(
             type="submit"
             value="Отправить"
-            
+            :disabled="disableSubmit"            
           )
   
 
@@ -52,7 +52,7 @@ export default {
       return Validator.value(value).required("Введите пароль");
     }
   },
-  data(){
+  data() {
     return {
       disableSubmit: false,
       user: {
@@ -75,7 +75,14 @@ export default {
           .then(responce => {
             /*const report = JSON.stringify(responce, null, 2);
             console.log(report);*/
-             this.auth = false;
+            responce.header("Access-Control-Allow-Origin", "*");
+            responce.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+            const token = responce.data.token
+            localStorage.setItem('user-token', token) // store the token in localstorage
+            //commit(AUTH_SUCCESS, token)
+            // you have your token, now log in your user :)
+           // dispatch(USER_REQUEST)
+            resolve(responce)
           });
       } catch (error) {
          console.log(error)
@@ -253,6 +260,10 @@ export default {
 .btn:disabled{
   background: #ccc;
   background-image: none;
+  &:hover{
+    background: #ccc;
+    background-image: none;
+  }
 }
 
 

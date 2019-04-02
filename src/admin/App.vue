@@ -10,6 +10,8 @@
 import Header from "./components/Header";
 import Tabs from "./components/tabs";
 import Login from "./components/Login";
+import PageNotFound from "./components/PageNotFound";
+
   export default {
     data() {
       return{

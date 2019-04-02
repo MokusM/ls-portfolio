@@ -255,6 +255,15 @@ export default {
   }
   .add-btn{
     margin-left: 30px;
+    @include tablets{
+      margin-left: 15px;
+    }
+  }
+  .skill-name{
+    @include tablets{
+      max-width: calc(100% - 160px);
+    }
+   
   }
   .skill-percent{
     width: 79px;
