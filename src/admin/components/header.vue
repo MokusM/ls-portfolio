@@ -3,7 +3,7 @@
     div.wrapper.wrapper-flex
       <User />
       span.header__title Панель администрирования
-      a(href="#").logout Выйти
+      a(href="#", @click="logout" ).logout Выйти
 
 
 </template>
@@ -14,6 +14,14 @@
     name: "Header",
     components: {
       User
+    },
+    methods: {
+      logout: function () {
+        this.$store.dispatch('logout')
+        .then(() => {
+          this.$router.push('/admin')
+        })
+      }
     }
   }
 </script>

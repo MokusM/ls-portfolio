@@ -1,19 +1,14 @@
 <template lang="pug">
   .user
     .user__img
-      img(:src="user[0].photo" alt="")
-    .user__name {{ user[0].name }}
+      img(src="../../admin/assets/img/user.jpg" alt="")
+    .user__name {{ $store.state.admin.name }}
 
 </template>
 
 <script>
 export default {
-  name: "User",
-  computed: {
-    user() {
-      return this.$store.getters.getUsers
-    }
-  },
+  name: "User"
 };
 
 </script>

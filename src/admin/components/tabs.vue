@@ -2,7 +2,7 @@
   div.wrapper
     ul.tabs-list
       li.tabs-list__item
-        router-link(to="/about-me").tabs-list__link Обо мне
+        router-link(to="/").tabs-list__link Обо мне
       li.tabs-list__item
         router-link(to="/works").tabs-list__link Работы
       li.tabs-list__item

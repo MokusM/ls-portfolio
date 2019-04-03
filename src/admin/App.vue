@@ -1,9 +1,9 @@
 <template lang="pug">
   .main-wrapper
-    <Header />
-    <Tabs />
-    <router-view />
-    <Login :cancel="cancelModal" v-if="auth"/>   
+    <Header v-if="isLoggedIn"/>
+    <Tabs v-if="isLoggedIn"/>
+    <router-view v-if="isLoggedIn"/>
+    <Login :cancel="cancelModal" v-if="!isLoggedIn"/>   
 </template>
 
 <script>
@@ -23,10 +23,24 @@ import PageNotFound from "./components/PageNotFound"
       Tabs,
       Login
     },
+    computed : {
+      isLoggedIn : function(){ return this.$store.getters.isLoggedIn}
+    },
     methods: {
       cancelModal () {
         this.auth = false;
       }
+    },
+    created: function () {
+      this.$http.interceptors.response.use(undefined, function (err) {
+        return new Promise(function (resolve, reject) {
+          if (err.status === 401 && err.config && !err.config.__isRetryRequest) {
+            this.$store.dispatch(logout);
+            alert('неверный пароль')
+          }
+          throw err;
+        });
+      });
     }
   }
 

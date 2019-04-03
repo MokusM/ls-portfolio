@@ -41,9 +41,6 @@ import axios from 'axios';
 export default {
   mixins: [require("simple-vue-validator").mixin],
   name: "Login",
-  props: {
-    cancel: Function
-  },
   validators: {
     "user.name": value =>  {
       return Validator.value(value).required("Введите имя пользователя");
@@ -66,22 +63,21 @@ export default {
       if ((await this.$validate()) === false) return;
       this.disableSubmit = true;
       try {
-        axios
-          .post("https://webdev-api.loftschool.com/login", {
-            name: this.user.name,
-            password: this.user.password
-          })
-          .then(responce => {
-            const report = JSON.stringify(responce, null, 2);
-            console.log(report);
-            this.cancel();
-          });
+        let name = this.user.name 
+        let password = this.user.password
+        this.$store.dispatch('login', { name, password })
+       .then(() => this.$router.push('/admin'))
+       .catch(err => console.log(err))
       } catch (error) {
          console.log(error)
       }
 
+    },
+    cancel () {
+      window.location.href = '/'
     }
   }
+  
 };
 
 </script>
