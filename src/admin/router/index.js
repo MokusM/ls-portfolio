@@ -1,7 +1,5 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import store from '../store'
-
 
 import About from '../components/About'
 import Works from '../components/Works'
@@ -32,12 +30,6 @@ const router = new Router({
   mode: 'history'
 })
 
-router.beforeEach((to, from, next) => {
-  if (!store.state.token && to.path !== '/admin') {
-    next('/admin')
-  } else {
-    next()
-  }
-})
+
 
 export default router

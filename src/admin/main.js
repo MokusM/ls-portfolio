@@ -6,6 +6,7 @@ import store from './store/';
 
 Vue.use(SimpleVueValidation);
 
+
 new Vue({
   el: "#app-root",
   router,

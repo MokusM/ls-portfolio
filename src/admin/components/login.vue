@@ -1,6 +1,6 @@
 <template lang="pug">
   .modal 
-    .modal-overlay(@click.stop="cancel()")
+    .modal-overlay
     .modal-content
       a(href="#").modal-content__close(@click.prevent="cancel()")       
       .modal-content__title Авторизация
@@ -74,6 +74,7 @@ export default {
           .then(responce => {
             const report = JSON.stringify(responce, null, 2);
             console.log(report);
+            this.cancel();
           });
       } catch (error) {
          console.log(error)
