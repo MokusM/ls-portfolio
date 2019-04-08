@@ -1,12 +1,12 @@
 <template lang="pug"> 
   div.wrapper
     ul.tabs-list
-      li.tabs-list__item
-        router-link(to="/").tabs-list__link Обо мне
-      li.tabs-list__item
-        router-link(to="/works").tabs-list__link Работы
-      li.tabs-list__item
-        router-link(to="/reviews").tabs-list__link Отзывы
+      li.tabs-list__item(v-for="tab in tabs")
+        router-link(
+          :data-text="tab.title" 
+          :to="tab.href"
+          exact-active-class="active"
+        ).tabs-list__link
        
        
 
@@ -15,7 +15,16 @@
 
 <script>
 export default {
-  name: "Tabs"
+  name: "Tabs",
+  data() {
+    return {
+      tabs: [
+        { title: "Обо мне", href: "/" },
+        { title: "Отзывы", href: "/reviews" },
+        { title: "Работы", href: "/works" }
+      ]
+    };
+  }
 };
 
 </script>
@@ -35,9 +44,12 @@ export default {
   display: block;
   padding: 19px 30px 18px;
   border-bottom: 3px solid transparent;
-  &.is-active{
+  &.active{
     color: #ea7400;
     border-bottom: 3px solid #ea7400;
+  }
+  &:before {
+    content: attr(data-text);
   }
   &:hover{
     color: #ea7400;

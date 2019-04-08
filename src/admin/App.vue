@@ -1,46 +1,25 @@
 <template lang="pug">
   .main-wrapper
-    <Header v-if="isLoggedIn"/>
-    <Tabs v-if="isLoggedIn"/>
-    <router-view v-if="isLoggedIn"/>
-    <Login :cancel="cancelModal" v-if="!isLoggedIn"/>   
+    app-header(v-if="isLoggedIn")
+    tabs(v-if="isLoggedIn")
+    <router-view/>  
 </template>
 
 <script>
-import Header from "./components/Header"
-import Tabs from "./components/tabs"
-import Login from "./components/Login"
-import PageNotFound from "./components/PageNotFound"
-
   export default {
     data() {
       return{
-        auth: true
+        isLoggedIn: true
       }
     },
     components: {
-      Header,
-      Tabs,
-      Login
-    },
-    computed : {
-      isLoggedIn : function(){ return this.$store.getters.isLoggedIn}
+      appHeader: () => import("components/header"),
+      tabs: () => import("components/tabs")
     },
     methods: {
       cancelModal () {
         this.auth = false;
       }
-    },
-    created: function () {
-      this.$http.interceptors.response.use(undefined, function (err) {
-        return new Promise(function (resolve, reject) {
-          if (err.status === 401 && err.config && !err.config.__isRetryRequest) {
-            this.$store.dispatch(logout);
-            alert('неверный пароль')
-          }
-          throw err;
-        });
-      });
     }
   }
 

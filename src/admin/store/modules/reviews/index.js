@@ -1,72 +1,69 @@
 export default {
-  namespaced: false,
-  state: {    
-    reviews: [{
-      id: 1,
-      author_name: 'Владимир Сабанцев',
-      author_occ: 'Основатель Loftschool',
-      author_pic: require('../../../../admin/assets/img/reviews-2.jpg'),      
-      text: '1 Этот парень проходил обучение веб-разработке не где-то, а в Loftschool! 4,5 месяца только самых тяжелых испытаний и бессонных ночей!'
-    },{
-      id: 2,
-      author_name: 'Владимир Сабанцев',
-      author_occ: 'Основатель Loftschool',
-      author_pic: require('../../../../admin/assets/img/reviews-1.jpg'),
-      text: '2 Этот парень проходил обучение веб-разработке не где-то, а в Loftschool! 4,5 месяца только самых тяжелых испытаний и бессонных ночей!'
-    },{
-      id: 3,
-      author_name: 'Владимир Сабанцев',
-      author_occ: 'Основатель Loftschool',
-      author_pic: require('../../../../admin/assets/img/reviews-2.jpg'),
-      text: '3 Этот парень проходил обучение веб-разработке не где-то, а в Loftschool! 4,5 месяца только самых тяжелых испытаний и бессонных ночей!'
-    },{
-      id: 4,
-      author_name: 'Владимир Сабанцев',
-      author_occ: 'Основатель Loftschool',
-      author_pic: require('../../../../admin/assets/img/reviews-1.jpg'),
-      text: '4 Этот парень проходил обучение веб-разработке не где-то, а в Loftschool! 4,5 месяца только самых тяжелых испытаний и бессонных ночей!'
-    }]
+  namespaced: true,
+  state: {
+    reviews: []
   },
-  getters: {
-    getReviews: state => state.reviews,
-    modulById (state) {
-      return modulId => {
-        return state.modules.find(modul => modul.id === modulId)
-      }
+  mutations: {
+    SET_REVIEWS: (state, reviews) => {
+      state.reviews = reviews;
+    },
+    ADD_REVIEWS: (state, newReview) => {
+      state.reviews.push(newReview);
+    },
+    REMOVE_REVIEW: (state, deletedReviewId) => {
+      state.reviews = state.reviews.filter(review => review.id !== deletedReviewId);
+    },    
+    EDIT_REVIEW: (state, editedReview) => {
+      state.reviews = state.reviews.map(review =>
+        review.id === editedReview.id ? editedReview : review
+      );
     }
   },
   actions: {
-    updateReviews (store, item) {
-      store.commit('updateReviews', item)
+    async fetchReviews({ commit }, reviews) {
+      try {
+        const response = await this.$axios.get("/reviews/106", reviews);
+        commit("SET_REVIEWS", response.data);
+        return response;
+      } catch (error) {
+        // error handling
+      }
     },
-    removeReviews (store, review) {
-      store.commit('removeReviews', review)
+    
+    async addReview({ commit }, review) {
+      try {
+        const formData = new FormData();
+        formData.append('photo', review.photo);
+        formData.append('author', review.author);      
+        formData.append('occ', review.occ);      
+        formData.append('text', review.text);      
+        const response = await this.$axios.post('/reviews', formData);
+        commit("ADD_REVIEWS", response.data);
+        return response;
+      } catch (error) {
+        // error handling
+      }
     },
-    addReviews (store, payload) {
-      store.commit('addReviews', payload)
-    }
-  },
-  mutations: {
-    updateReviews (state, item) {
-      state.reviews.map((review, i) => {
-        if (review.id === item.id) {
-          state.reviews[i] = item
-        }
-      })
+
+    async removeReview({ commit }, reviewId) {
+      try {
+        const response = await this.$axios.delete(`/reviews/${reviewId}`);
+        commit("REMOVE_REVIEW", reviewId);
+        return response;
+      } catch (error) {
+        generateStdError(error);
+      }
     },
-    removeReviews (state, review) {
-      var reviews = state.reviews
-      reviews.splice(reviews.indexOf(review), 1)
+
+    async editReview({ commit }, review) {
+      try {
+        const response = await this.$axios.post(`/reviews/${review.id}`, review);
+        commit('EDIT_REVIEW', response.data.review);
+        return response;
+      } catch (error) {
+        // error handling
+      }
     },
-    addReviews (state, payload) {
-      state.reviews.push({
-        title: payload.newModul,
-        description: payload.newModulDesc,
-        price: payload.newModulPrice,
-        free: payload.newModulFree,
-        imgSrc: payload.newModulImg,
-        id: state.modules.length+1
-      })
-    }
+    
   }
-}
+};

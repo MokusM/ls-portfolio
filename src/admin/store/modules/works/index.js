@@ -1,3 +1,4 @@
+import axios from 'axios'
 export default {
   namespaced: false,
   state: {    
@@ -30,6 +31,21 @@ export default {
       link: "http://loftschool.ru",
       desc: "Этот парень проходил обучение веб-разработке не где-то, а в LoftSchool! 2 месяца только самых тяжелых испытаний и бессонных ночей!"
     }]
+  },
+  mutations : {
+    
+  },
+  actions: {
+    updateWorks: async (context, name) => {
+      let {data} = await axios.post('https://webdev-api.loftschool.com/categories', {name: name})
+        .then(resp => {
+        axios.defaults.headers.common['Authorization'] = token
+      })
+  
+      if (data.status == 200) {
+        context.commit('updateWorks', name);
+      }
+    },
   },
   getters: {
     getWorks: state => state.works
