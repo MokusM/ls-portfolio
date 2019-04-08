@@ -3,7 +3,7 @@
     div.wrapper.wrapper-flex
       <User />
       span.header__title Панель администрирования
-      a(href="#").logout Выйти
+      a(href="#", @click="logout" ).logout Выйти
 
 
 </template>
@@ -14,11 +14,20 @@
     name: "Header",
     components: {
       User
+    },
+    methods: {
+      logout: function () {
+        this.$store.dispatch('logout')
+        .then(() => {
+          this.$router.push('/admin')
+        })
+      }
     }
   }
 </script>
 
 <style lang="postcss">
+  @import "../../styles/mixins.pcss";
 .header{
   background-color: #3e3e59;
   background-image: linear-gradient(to right, #3e3e59 0%, #454573 100%);
@@ -30,6 +39,9 @@
     line-height: 24px;
     margin: 0 auto 0 27px;
     padding-top: 4px;
+    @include tablets{
+      display: none;
+    }
   }
 }
 .wrapper-flex{
@@ -37,6 +49,7 @@
   justify-content: space-between;
   align-items: center;     
   height: 80px; 
+  position: relative;
 }
 .logout{
   opacity: 0.7;
@@ -48,6 +61,14 @@
   &:hover{
     opacity: 1;
     text-decoration: none;
+  }
+  @include bp-tablets-lg{
+    font-size: 14px;
+  }
+  @include tablets{
+    position: absolute;
+    left: 73px;
+    bottom: 18px;
   }
 }
 </style>

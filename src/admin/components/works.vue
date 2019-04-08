@@ -24,8 +24,12 @@
                 a(:href="work.link").work-link {{ work.link }} 
     
                 .admin-layout-list__bottom
-                  a(href="#").link-change Править
-                  a(href="#").link-remove(@click="remove(work.id)") Удалить
+                  a(href="#").link-change 
+                    span.link-change__text Править 
+                    span.link-change__icon
+                  a(href="#").link-remove(@click="remove(review.id)") 
+                    span.link-remove__text Удалить 
+                    span.link-remove__icon
   
   
   
@@ -49,7 +53,8 @@
   
   </script>
   
-<style>
+<style lang="postcss">
+    @import "../../styles/mixins.pcss";
 .works-list{
   .admin-layout-list__cont{
     padding:  0;
@@ -61,6 +66,15 @@
   .admin-layout-list__bottom{
     margin-top: 35px;
     padding: 0;
+    @include tablets{
+      margin-top: 25px;
+      margin-bottom: 12px;
+    }
+  }
+  .add-item__link{
+    @include tablets{
+      padding: 25px 22px;
+    }
   }
 }
 .admin-layout-list__img{
@@ -72,13 +86,22 @@
 }
 .admin-layout-list__text-content{
   padding: 35px 30px  40px;
+  @include tablets{
+    padding: 24px 20px;
+  }
 }
 .tag-list{
   margin: 0 -5px 0px;
+  @include tablets{
+    margin: 0 -2px;
+  }
   &__item{
     display: inline-block;
     vertical-align: top;
     padding: 0 5px;
+    @include tablets{
+      padding:  0 2px;
+    }
   }
   &__title{
     display: block;
@@ -98,6 +121,9 @@
   font-weight: 700;
   line-height: 24px;
   margin-bottom: 17px;
+  @include tablets{
+    margin-bottom: 10px;
+  }
 }
 .admin-layout-list__tag{
   position: absolute;
@@ -109,6 +135,9 @@
   font-size: 16px;
   font-weight: 600;
   line-height: 30px;
+  @include tablets{
+    font-size: 14px;
+  }
 }
 </style>
   

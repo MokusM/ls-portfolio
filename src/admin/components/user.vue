@@ -1,24 +1,20 @@
 <template lang="pug">
   .user
     .user__img
-      img(:src="user[0].photo" alt="")
-    .user__name {{ user[0].name }}
+      img(src="../../admin/assets/img/user.jpg" alt="")
+    .user__name {{ $store.state.admin.name }}
 
 </template>
 
 <script>
 export default {
-  name: "User",
-  computed: {
-    user() {
-      return this.$store.getters.getUsers
-    }
-  },
+  name: "User"
 };
 
 </script>
 
 <style lang="postcss">
+@import "../../styles/mixins.pcss";
 .user{
   display: flex;
   align-items: center;
@@ -39,6 +35,11 @@ export default {
     font-weight: 600;
     line-height: 24px;
     padding-left: 19px;
+    @include tablets{
+      font-size: 16px;
+      padding-left: 10px;
+      padding-bottom: 24px;
+    }
   }
 }
 </style>

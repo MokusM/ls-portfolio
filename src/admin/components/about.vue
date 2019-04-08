@@ -13,10 +13,8 @@
               .skill-title
                 input(placeholder="Название новой группы").input-skill
                 .skill-title__links
-                  a(href="#").lick-icon                
-                    svgicon(icon="tick", width="16", height="14", color="#00d70a")
-                  a(href="#").lick-icon                
-                    svgicon(icon="remove", width="12", height="14", color="#bf2929")                          
+                  a(href="#").tick-icon                
+                  a(href="#").remove-icon                         
               .skill__main
               .skill__add
                 form.add-skill
@@ -31,10 +29,8 @@
               .skill-title
                 input(placeholder="Название новой группы", value="Workflow").input-skill
                 .skill-title__links
-                  a(href="#").lick-icon                
-                    svgicon(icon="tick", width="16", height="14", color="#00d70a")
-                  a(href="#").lick-icon                
-                    svgicon(icon="remove", width="12", height="14", color="#bf2929")                          
+                  a(href="#").tick-icon                
+                  a(href="#").remove-icon                          
               .skill__main
                 ul.skills
                   .skills__item 
@@ -42,43 +38,82 @@
                       input(type="text", placeholder="Новый навык", value="Git", disabled).input-skill
                     .skill-percent
                       input(type="text", placeholder="Новый навык", value="100", disabled).input-skill
-                    a(href="#")                
-                      svgicon(icon="pencil", width="13", height="13", color="#a0a5b1")
-                    a(href="#")                
-                      svgicon(icon="trash", width="13", height="15", color="#a0a5b1")
+                    .skills__links
+                      a(href="#").pencil-icon  
+                      a(href="#").trash-icon
                   .skills__item 
                     .skill-name
                       input(type="text", placeholder="Новый навык", value="Terminal", disabled).input-skill
                     .skill-percent
                       input(type="text", placeholder="Новый навык", value="90", disabled).input-skill
-                    a(href="#")                
-                      svgicon(icon="pencil", width="13", height="13", color="#a0a5b1")
-                    a(href="#")                
-                      svgicon(icon="trash", width="13", height="15", color="#a0a5b1")
+                    .skills__links
+                      a(href="#").pencil-icon  
+                      a(href="#").trash-icon
                   .skills__item 
                     .skill-name
                       input(type="text", placeholder="Новый навык", value="Gulp", disabled).input-skill
                     .skill-percent
                       input(type="text", placeholder="Новый навык", value="80", disabled).input-skill
-                    a(href="#")                
-                      svgicon(icon="pencil", width="13", height="13", color="#a0a5b1")
-                    a(href="#")                
-                      svgicon(icon="trash", width="13", height="15", color="#a0a5b1")
+                    .skills__links
+                      a(href="#").pencil-icon  
+                      a(href="#").trash-icon
                   .skills__item 
                     .skill-name
                       input(type="text", placeholder="Новый навык", value="Webpack", disabled).input-skill
                     .skill-percent
                       input(type="text", placeholder="Новый навык", value="80", disabled).input-skill
-                    a(href="#")                
-                      svgicon(icon="pencil", width="13", height="13", color="#a0a5b1")
-                    a(href="#")                
-                      svgicon(icon="trash", width="13", height="15", color="#a0a5b1")
-                    
+                    .skills__links
+                      a(href="#").pencil-icon  
+                      a(href="#").trash-icon
+              .skill__add
+                form.add-skill
+                  .skill-name
+                    input(type="text", placeholder="Новый навык").input-skill
+                  .skill-percent
+                    input(type="text", placeholder="Новый навык", value="100").input-skill
+                  button(type="submit").add-btn +
 
-
-
-
-                        
+        .admin-layout-list__item
+          .admin-layout-list__cont
+            .skill
+              .skill-title
+                input(placeholder="Название новой группы", value="Frontend").input-skill
+                .skill-title__links
+                  a(href="#").pencil-icon                          
+              .skill__main
+                ul.skills
+                  .skills__item 
+                    .skill-name
+                      input(type="text", placeholder="Новый навык", value="Html5", disabled).input-skill
+                    .skill-percent
+                      input(type="text", placeholder="Новый навык", value="100", disabled).input-skill
+                    .skills__links
+                      a(href="#").pencil-icon  
+                      a(href="#").trash-icon
+                  .skills__item 
+                    .skill-name    
+                      input(type="text", placeholder="Новый навык", value="СSS3").input-skill
+                    .skill-percent
+                      input(type="text", placeholder="Новый навык", value="90").input-skill
+                    .skills__links
+                      a(href="#").tick-icon                
+                      a(href="#").remove-icon
+                  .skills__item 
+                    .skill-name
+                      input(type="text", placeholder="Новый навык", value="JavaScript", disabled).input-skill
+                    .skill-percent
+                      input(type="text", placeholder="Новый навык", value="80", disabled).input-skill
+                    .skills__links
+                      a(href="#").pencil-icon  
+                      a(href="#").trash-icon
+                  .skills__item 
+                    .skill-name
+                      input(type="text", placeholder="Новый навык", value="Jquery и Vue.js", disabled).input-skill
+                    .skill-percent
+                      input(type="text", placeholder="Новый навык", value="80", disabled).input-skill
+                    .skills__links
+                      a(href="#").pencil-icon  
+                      a(href="#").trash-icon
               .skill__add
                 form.add-skill
                   .skill-name
@@ -92,23 +127,29 @@
 </template>
 
 <script>
-import '../assets/svg-icons/tick';
-import '../assets/svg-icons/remove';
-import '../assets/svg-icons/pencil';
-import '../assets/svg-icons/trash';
 export default {
   name: "About",
 };
 
 </script>
 
-<style>
+<style lang="postcss">
+@import "../../styles/mixins.pcss";
 .main-content{
   background-color: #f7f9fe;
   padding-top: 35px;
   display: block;
+  @include bp-tablets-lg{
+    padding-top: 24px;
+  }
+  @include tablets{
+    padding-top: 16px;
+  }
   &__title{
     margin-bottom: 38px;
+    @include bp-tablets-lg{
+      margin-bottom: 29px;
+    }
   }
   h2{
     color: #414c63;
@@ -116,14 +157,43 @@ export default {
     font-weight: 700;
     line-height: 34px;
     padding: 15px 0;
+    @include tablets{
+      font-size: 18px;
+    }
   }
 }
 .admin-layout-two-col{
+  @include bp-tablets-lg{
+    margin: 0 -10px;
+  }
   .admin-layout-list__item{
       width: 50%;
+      @include bp-tablets-lg{
+       padding: 0 10px;
+      }
+      @include tablets{
+        padding: 0;
+      }
+      @include tablets{
+        width: 100%;
+      }
   }
   .admin-layout-list__cont{
     padding: 13px 20px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    @include tablets{
+      padding: 5px 0;
+    }
+  }
+  .skill{
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+  }
+  .skill__add{
+    margin-top: auto;
   }
 }
 .skill-title{
@@ -131,15 +201,26 @@ export default {
   display: flex;
   align-items: center;    
   justify-content: space-between;
-  padding:0 10px 14px;
+  padding:0 9px 14px 10px;
+  @include tablets{
+    padding: 10px 18px;
+  }
   &__links{
-    padding-top: 8px;
+    padding-top: 5px;
     display: flex;
     align-items: center;
-    margin: 0 -9px;
-    a{
-      padding: 0 9px;
-      display: block;
+    .remove-icon{
+      margin-left: 19px;
+      @include tablets{
+        margin-left: 9px;
+      }
+  
+    }
+  }
+  .input-skill{
+    height: 48px;
+    @include tablets{
+      max-width: calc(100% - 50px);
     }
   }
 }
@@ -152,16 +233,45 @@ export default {
   border-bottom: 1px solid #1f232d;
   display: block;
   width: 100%;
-  height: 48px;
+  height: 32px;
   max-width: 273px;  
   &:disabled{
     border-bottom-color: transparent;
     background-color: transparent;
   }
+  @include tablets{
+    font-size: 16px;
+  }
 }
 .add-skill{
-  margin: 0 -5px;
   display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  .input-skill{
+    font-size: 16px;
+    line-height: 32px;
+    height: 48px;
+    padding: 0 15px;
+  }
+  .add-btn{
+    margin-left: 30px;
+    @include tablets{
+      margin-left: 15px;
+    }
+  }
+  .skill-name{
+    @include tablets{
+      max-width: calc(100% - 160px);
+    }
+   
+  }
+  .skill-percent{
+    width: 79px;
+    margin-left: 5px;
+    &:before{
+      top: 8px;
+    }
+  }
 }
 .add-btn{
   width: 40px;
@@ -192,22 +302,70 @@ export default {
     line-height: 32px;
   }
 }
+.skill{
+  &__main{
+    padding: 17px 6px 17px 10px;
+    @include tablets{
+      padding: 18px 20px;
+    }
+  }
+  &__add{
+    padding: 0 9px;
+  }
+}
 .skills{
   &__item{
     display: flex;
     justify-content: space-between;
-    margin-bottom: 8px;
+    align-items: center;
+    margin-bottom: 11px;
+    &:last-child{
+      margin-bottom: 0;
+    }
+  }
+  &__links{
+    display: flex;
+    &*{
+      display: block;
+    }
+    a:last-child{
+      margin-left: 18px;
+    }
   }
   .input-skill{
     font-size: 16px;
     font-weight: 400;
     line-height: 32px;
   }
+  .skill-name{
+    @include bp-tablets-lg{
+     max-width: calc(100% - 130px);
+    }
+  }
+  .skill-percent{
+    width: 61px;
+    margin: 0 58px 0 auto;
+    @include bp-tablets-lg{
+      margin-right: 30px;
+    }
+    .input-skill{
+      @include bp-tablets-lg{
+        padding-right: 15px;
+      }
+    }
+  }
 }
 .title-with-btn{
   display: flex;
   align-items: center;
   margin-bottom: 38px;
+  @include bp-tablets-lg{
+    margin-bottom: 28px;
+  }
+  @include tablets{
+    flex-direction:column;
+    align-items: flex-start;
+  }
   h2{
      margin-bottom: 0px;
      margin-right: 56px;
@@ -226,6 +384,9 @@ export default {
     line-height: 34px;
     display: inline-block;
     margin-left: 15px;
+    @include tablets{
+      font-size: 14px;
+    }
   }
   .add-btn{
     width: 20px;
@@ -233,5 +394,37 @@ export default {
     font-size: 15px;
     line-height: 20px;
   }
+}
+.tick-icon{
+  background: svg-load('tick.svg', fill=#00d70a, width=100%, height=100%);
+  width: 16px;
+  height: 14px;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: contain;
+}
+.remove-icon{
+  background: svg-load('remove.svg', fill=#bf2929, width=100%, height=100%);
+  width: 14px;
+  height: 12px;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: contain;
+}
+.pencil-icon{
+  background: svg-load('pencil.svg', fill=#a0a5b1, width=100%, height=100%);
+  width: 16px;
+  height: 15px;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: contain;
+}
+.trash-icon{
+  background: svg-load('trash.svg', fill=#a0a5b1, width=100%, height=100%);
+  width: 18px;
+  height: 15px;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: contain;
 }
 </style>

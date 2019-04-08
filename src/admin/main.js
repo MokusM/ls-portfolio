@@ -1,10 +1,18 @@
 import Vue from 'vue';
 import App from './App.vue';
+import SimpleVueValidation from 'simple-vue-validator';
 import router from './router/';
 import store from './store/';
-import VueSVGIcon from 'vue-svgicon'
+import Axios from 'axios';
 
-Vue.use(VueSVGIcon)
+Vue.use(SimpleVueValidation);
+
+
+Vue.prototype.$http = Axios;
+const token = localStorage.getItem('token')
+if (token) {
+  Vue.prototype.$http.defaults.headers.common['Authorization'] = token
+}
 
 
 new Vue({

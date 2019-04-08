@@ -1,25 +1,46 @@
 <template lang="pug">
   .main-wrapper
-    <Header />
-    <Tabs />
-    <router-view />
-    <Login v-if="auth"/>   
+    <Header v-if="isLoggedIn"/>
+    <Tabs v-if="isLoggedIn"/>
+    <router-view v-if="isLoggedIn"/>
+    <Login :cancel="cancelModal" v-if="!isLoggedIn"/>   
 </template>
 
 <script>
-import Header from "./components/Header";
-import Tabs from "./components/tabs";
-import Login from "./components/Login";
+import Header from "./components/Header"
+import Tabs from "./components/tabs"
+import Login from "./components/Login"
+import PageNotFound from "./components/PageNotFound"
+
   export default {
     data() {
       return{
-        auth: false
+        auth: true
       }
     },
     components: {
       Header,
       Tabs,
       Login
+    },
+    computed : {
+      isLoggedIn : function(){ return this.$store.getters.isLoggedIn}
+    },
+    methods: {
+      cancelModal () {
+        this.auth = false;
+      }
+    },
+    created: function () {
+      this.$http.interceptors.response.use(undefined, function (err) {
+        return new Promise(function (resolve, reject) {
+          if (err.status === 401 && err.config && !err.config.__isRetryRequest) {
+            this.$store.dispatch(logout);
+            alert('неверный пароль')
+          }
+          throw err;
+        });
+      });
     }
   }
 
@@ -100,6 +121,12 @@ img {
   max-width: 1570px;
   margin: 0 auto;
   padding:  0 60px;
+  @include bp-tablets-lg{
+    padding: 0 30px;
+  }
+  @include tablets{
+    padding: 0 20px;
+  }
 }
 
 

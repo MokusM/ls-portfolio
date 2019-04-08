@@ -2,7 +2,7 @@
   div.wrapper
     ul.tabs-list
       li.tabs-list__item
-        router-link(to="/about-me").tabs-list__link Обо мне
+        router-link(to="/").tabs-list__link Обо мне
       li.tabs-list__item
         router-link(to="/works").tabs-list__link Работы
       li.tabs-list__item
@@ -21,6 +21,7 @@ export default {
 </script>
 
 <style lang="postcss">
+@import "../../styles/mixins.pcss";
 .tabs-list{
   display: flex;
   list-style: none;
@@ -40,6 +41,10 @@ export default {
   }
   &:hover{
     color: #ea7400;
+  }
+  @include tablets{
+    font-size: 14px;
+    padding: 19px 19px 18px;
   }
 }
 
