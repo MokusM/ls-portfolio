@@ -10,8 +10,8 @@
       .admin-layout-list__text 
         p {{ review.text }} 
       .admin-layout-list__bottom
-        a(href="#").link-change 
-          span.link-change__text Править 
+        a(href="#").link-change
+          span.link-change__text(@click.prevent="chooseBlock") Править 
           span.link-change__icon
         a(href="#" @click.prevent="removeExistedReview").link-remove 
           span.link-remove__text Удалить               
@@ -20,24 +20,47 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapActions, mapState, mapMutations } from "vuex";
 export default {
   props: {
-    review: Object
-  },
-  data() {
-    return {
-      editmode: false
+    review: Object,
+    mode: {
+      type: String,
+      default: "edit"
     }
   },
+  computed: { ...mapState('reviews', ['currentReview']) },
   methods: {
-    ...mapActions("reviews", ["removeReview"]),
+    ...mapActions("reviews", ["removeReview" ,"chooseReview"]),
+    ...mapActions('tooltips', ["showTooltip"]),
     async removeExistedReview() {
-      try {
-        console.log(this.review.id);
-        await this.removeReview(this.review.id);        
-      } catch (error) {}
+      try {        
+        await this.removeReview(this.review.id); 
+        this.showTooltip({
+          type: "success",
+          text: "Отзыв удалён",
+        })       
+      } catch (error) {
+        this.showTooltip({
+          type: "error",
+          text: error.message
+        })
+      }
     },
+    async chooseBlock() {
+      try {        
+        await this.chooseReview(this.review);
+        this.showTooltip({
+          type: "success",
+          text: "Отзыв выбран",
+        })
+      } catch (error) {
+        this.showTooltip({
+          type: "error",
+          text: error.message
+        })
+      }
+    }
   }
 };
 </script>

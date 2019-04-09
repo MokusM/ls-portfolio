@@ -34,13 +34,21 @@ export default {
   },
   methods: {
     ...mapActions("categories", ["addNewSkillGroup"]),
+    ...mapActions('tooltips', ["showTooltip"]),
     async addSkillGroup() {
       if ((await this.$validate()) === false) return;
       try {
         await this.addNewSkillGroup(this.skillTitle);
         this.skillTitle = "";
+        this.showTooltip({
+          type: "success",
+          text: "Новая категория добавлена"
+        })
       } catch (error) {
-        alert(error.message)
+        this.showTooltip({
+          type: "error",
+          text: error.message
+        })
       }
     }
   }

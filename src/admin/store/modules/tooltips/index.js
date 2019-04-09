@@ -2,20 +2,30 @@
 export default {
   namespaced: true,
   state: {
-    tooltips: []
-  },
+    tooltip: {
+      show: false,
+      text: '',
+      type: ''
+    }
+  },  
   mutations: {
-    
+    SHOW_TOOLTIP: (state, { text, type }) => {
+      state.tooltip.show = true
+      state.tooltip.text = text
+      state.tooltip.type = type
+    },
+    HIDE_TOOLTIP: (state) => {
+      state.tooltip.show = false
+      state.tooltip.text = ''
+      state.tooltip.type = ''
+    },
   },
   actions: {
-    async addSkill({ commit }, skill) {
-      try {
-        const response = await this.$axios.post("/skills", skill);
-        commit("ADD_SKILL", response.data);
-        return response;
-      } catch (error) {
-        // error handling
-      }
-    }
+    showTooltip ({ commit }, tooltip) {
+      commit("SHOW_TOOLTIP", tooltip);
+    },   
+    hideTooltip (store, tooltip) {
+      store.commit('HIDE_TOOLTIP', tooltip)
+    },
   }
 };

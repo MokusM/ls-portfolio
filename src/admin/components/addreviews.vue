@@ -2,10 +2,9 @@
   .addreviews
     .addreviews__title Новый отзыв
     .addreviews__form 
-      form.reviews-form(        
-        @submit="addNewReview"
-        @cancel="closeForm"
-      )
+      form.reviews-form(
+          @submit="mode === 'add' ?  editCurrentReview() : addNewReview()"
+        )
         .reviews-form__avatar
           label.upload-avatar(:class="{error: validation.hasError('review.photo')}")
             input(
@@ -13,8 +12,8 @@
               @change="handlePhotoUpload"
             )
             .upload-avatar__img(
-              :class="{'filled' : this.rendedPhotoUrl.length}"
-              :style="{'backgroundImage' : `url(${this.rendedPhotoUrl})`}"
+              :class="{'filled' : renderedAvatar.length}"
+              :style="{'backgroundImage' : userAvatarUrl}"
             )
               .upload-avatar__icon
             .upload-avatar__link Добавить фото
@@ -41,14 +40,19 @@
               .input-error {{ validation.firstError('review.text') }}
 
           .box-field-btn
-            a(type="#" @click.prevent="closeForm").cancel-form Отмена
-            input.btn.btn-orange(type="submit", value="Сохранить" @click="addNewReview") 
+            a(type="#" @click.prevent="showForm").cancel-form Отмена
+            input.btn.btn-orange(type="submit", value="Сохранить") 
+
+          pre {{currentReview}}
+
+  
             
 </template>
 
 <script>
 import { mapActions, mapState } from "vuex";
 import { Validator } from 'simple-vue-validator';
+import { renderer, getAbsoluteImgPath } from '@/helpers/pictures';
 import $axios from "@/requests";
 export default {
   mixins: [require("simple-vue-validator").mixin],
@@ -66,9 +70,16 @@ export default {
       return Validator.value(value).required("Вставте аватар");
     }
   },
+  props: {
+    showForm: Function,
+    mode: {
+      type: String,
+      default: "add"
+    }
+  },
   data() {
     return {
-      rendedPhotoUrl: "",
+      renderedAvatar: "",
       review: {
         id: 0,
         author: "",
@@ -77,6 +88,22 @@ export default {
         photo: ""
       }
     }
+  },
+  watch: {
+    currentReview(value){
+      if(this.mode === "edit") this.fillFormWithCurrentReviewData();
+    }
+  },
+  created() {
+    if(this.mode === "edit") this.fillFormWithCurrentReviewData();
+  },
+  computed: {
+    userAvatarUrl() {
+      return `url(${this.renderedAvatar})`
+    },
+    ...mapState('reviews', {
+      currentReview:  state => state.currentReview
+    })
   },
   methods: {
     ...mapActions('reviews', ['addReview', "updateReview"]),
@@ -87,23 +114,25 @@ export default {
       this.review.author = '';
       this.review.text = '';
       this.review.photo = '';
+      this.disabledRorm = true;
     },
     async editCurrentReview() {
       if ((await this.$validate()) === false) return;
       this.disabledRorm = true;
       try {
         const responce = await this.updateReview(this.review);
-        this.$emit("cancel");
-        /*this.showTooltip({
+        this.clearFormFields();        
+        this.showTooltip({
           type: "success",
-          text: "Работа обновлена",
-        })*/
+          text: "Отзыв обновлен",
+        })
       } catch (error) {
-        /*this.showTooltip({
+        this.showTooltip({
           type: "error",
           text: error.message
-        })*/
+        })
       } finally {
+        this.disabledRorm = false;
         this.validation.reset();
       }
     },
@@ -112,19 +141,19 @@ export default {
       this.disabledRorm = true;
       try {
         const responce = await this.addReview(this.review);
-        this.clearFormFields();
-        /*this.showTooltip({
+        this.clearFormFields();        
+        this.showTooltip({
           type: "success",
           text: "Отзыв добавлен",
-        })*/
+        })
       } catch (error) {
-        /*this.showTooltip({
+        this.showTooltip({
           type: "error",
           text: error.message
-        })*/
+        })
       } finally {
         this.disabledRorm = false;
-        //this.validation.reset();
+        this.validation.reset();
       }
     },
     clearFormFields() {
@@ -133,27 +162,23 @@ export default {
       this.review.author = '';
       this.review.text = '';
       this.review.photo = '';
-      this.rendedPhotoUrl = "";
+      this.renderedAvatar = "";      
     },
     fillFormWithCurrentReviewData() {
-      this.review = { ...this.currentReview };
-      this.renderedAvatar = getAbsoluteImgPath(this.currentReview.photo);
+      this.review = {...this.currentReview };
+      this.rendedPhotoUrl = getAbsoluteImgPath(this.currentReview.photo);
     },
     async handlePhotoUpload(e) {
       const file = e.target.files[0];
-      this.review.photo = file;      
-      const reader = new FileReader();
+      this.review.photo = file; 
       try {
-        reader.readAsDataURL(file);
-        reader.onload = () => {
-          this.rendedPhotoUrl = reader.result;
-        };
+        const renderedResult = await renderer(file);
+        this.renderedAvatar = renderedResult;
       } catch (error) {
-        alert("sh*t happens :(");
-        /*this.showTooltip({
+        this.showTooltip({
           type: "error",
           text: "Ошибка во время обработки файла"
-        })*/
+        })
       }
     }
   }

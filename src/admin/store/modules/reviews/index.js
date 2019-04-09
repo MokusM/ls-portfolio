@@ -1,7 +1,8 @@
 export default {
   namespaced: true,
   state: {
-    reviews: []
+    reviews: [],
+    currentReview: {}
   },
   mutations: {
     SET_REVIEWS: (state, reviews) => {
@@ -13,11 +14,14 @@ export default {
     REMOVE_REVIEW: (state, deletedReviewId) => {
       state.reviews = state.reviews.filter(review => review.id !== deletedReviewId);
     },    
-    EDIT_REVIEW: (state, editedReview) => {
+    UPDATE_REVIEW: (state, editedReview) => {
       state.reviews = state.reviews.map(review =>
         review.id === editedReview.id ? editedReview : review
       );
-    }
+    },
+    CHOOSE_REVIEW(state, item) {
+      state.currentReview =  item
+    },
   },
   actions: {
     async fetchReviews({ commit }, reviews) {
@@ -55,10 +59,18 @@ export default {
       }
     },
 
-    async editReview({ commit }, review) {
+    async chooseReview({ commit }, item) {
+      try {        
+        commit("CHOOSE_REVIEW", item);
+      } catch (error) {
+        
+      }
+    },
+
+    async updateReview({ commit }, review) {
       try {
         const response = await this.$axios.post(`/reviews/${review.id}`, review);
-        commit('EDIT_REVIEW', response.data.review);
+        commit('UPDATE_REVIEW', response.data.review);
         return response;
       } catch (error) {
         // error handling

@@ -45,6 +45,7 @@
     },
     methods: {
       ...mapActions("skills", ["removeSkill", "editSkill"]),
+      ...mapActions('tooltips', ["showTooltip"]),
       async removeExistedSkill() {
         try {
           await this.removeSkill(this.skill.id);
@@ -55,9 +56,16 @@
         try {
           await this.editSkill(this.editedSkill);
           this.editmode = false;
+          this.showTooltip({
+            type: "success",
+            text: "Навык отредактирован"
+          })
         } catch (error) {
-          
-        }
+          this.showTooltip({
+            type: "error",
+            text: error.message
+          })
+        } 
       }
     }
   };

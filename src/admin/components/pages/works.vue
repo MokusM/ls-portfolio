@@ -1,35 +1,35 @@
 <template lang="pug">
-    content.main-content
-      div.wrapper 
-        h2.main-content__title Блок «Работы»
-        addworks
-        ul.admin-layout-list.works-list
-          .admin-layout-list__item.add-item 
-            a(href="#").admin-layout-list__cont.add-item__link
-              span.add-item__icon +
-              span.add-item__title Добавить работу
-          .admin-layout-list__item(v-for="(work, index) in works" :key="work.id")
-            .admin-layout-list__cont
-              .admin-layout-list__img
-                img(:src="work.photo" alt="")
-                ul.tag-list.admin-layout-list__tag
-                  li.tag-list__item
-                    .tag-list__title 45
-              .admin-layout-list__text-content
-                .admin-layout-list__title {{ work.title }}                 
+  content.main-content
+    div.wrapper 
+      h2.main-content__title Блок «Работы»
+      addworks
+      ul.admin-layout-list.works-list
+        .admin-layout-list__item.add-item 
+          a(href="#").admin-layout-list__cont.add-item__link
+            span.add-item__icon +
+            span.add-item__title Добавить работу
+        .admin-layout-list__item(v-for="work in works" :key="work.id")
+          .admin-layout-list__cont
+            .admin-layout-list__img
+              img(:src="work.photo" alt="")
+              ul.tag-list.admin-layout-list__tag
+                li.tag-list__item
+                  .tag-list__title 45
+            .admin-layout-list__text-content
+              .admin-layout-list__title {{ work.title }}                 
 
-                .admin-layout-list__text 
-                  p {{ work.desc }} 
-                
-                a(:href="work.link").work-link {{ work.link }} 
-    
-                .admin-layout-list__bottom
-                  a(href="#").link-change 
-                    span.link-change__text Править 
-                    span.link-change__icon
-                  a(href="#").link-remove(@click="remove(review.id)") 
-                    span.link-remove__text Удалить 
-                    span.link-remove__icon
+              .admin-layout-list__text 
+                p {{ work.desc }} 
+              
+              a(:href="work.link").work-link {{ work.link }} 
+  
+              .admin-layout-list__bottom
+                a(href="#").link-change 
+                  span.link-change__text Править 
+                  span.link-change__icon
+                a(href="#").link-remove 
+                  span.link-remove__text Удалить 
+                  span.link-remove__icon
   
   
   
@@ -37,16 +37,28 @@
 </template>
   
 <script>
-  import { mapState } from 'vuex'
+import { mapActions, mapState } from "vuex";
   export default {
     name: "Works",
     components: {
       addworks: () => import('components/addworks')
     },
     computed: {
-      ...mapState(['works'])
-    }
-    
+      ...mapState('works', {
+        works: state => state.works
+      })
+    },
+    methods: {
+      ...mapActions('works', ["fetchWorks"]),
+    },
+    async created() {
+      try {
+        await this.fetchWorks(); 
+      } catch (error) {
+        alert('Произошла ошибка при загрузке отзивов') 
+      }
+    },
+      
   };
   
   </script>

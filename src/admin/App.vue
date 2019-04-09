@@ -2,7 +2,8 @@
   .main-wrapper
     app-header(v-if="isLoggedIn")
     tabs(v-if="isLoggedIn")
-    <router-view/>  
+    router-view
+    tooltips 
 </template>
 
 <script>
@@ -14,7 +15,8 @@
     },
     components: {
       appHeader: () => import("components/header"),
-      tabs: () => import("components/tabs")
+      tabs: () => import("components/tabs"),
+      tooltips: () => import("components/tooltips")
     },
     methods: {
       cancelModal () {

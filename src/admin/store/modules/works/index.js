@@ -1,53 +1,46 @@
-import axios from 'axios'
 export default {
-  namespaced: false,
-  state: {    
-    works: [{
-      id: 1,
-      title: 'Сайт школы образования',
-      skills: "Html, Css, JavaScript",
-      photo:  require('../../../../admin/assets/img/previews-1.jpg'),
-      link: "http://loftschool.ru",
-      desc: "Этот парень проходил обучение веб-разработке не где-то, а в LoftSchool! 2 месяца только самых тяжелых испытаний и бессонных ночей!"
-    },{
-      id: 2,
-      title: 'Сайт школы образования',
-      skills: "Html, Css, JavaScript",
-      photo:  require('../../../../admin/assets/img/previews-2.jpg'),
-      link: "http://loftschool.ru",
-      desc: "Этот парень проходил обучение веб-разработке не где-то, а в LoftSchool! 2 месяца только самых тяжелых испытаний и бессонных ночей!"
-    },{
-      id: 3,
-      title: 'Сайт школы образования',
-      skills: "Html, Css, JavaScript",
-      photo:  require('../../../../admin/assets/img/previews-3.jpg'),
-      link: "http://loftschool.ru",
-      desc: "Этот парень проходил обучение веб-разработке не где-то, а в LoftSchool! 2 месяца только самых тяжелых испытаний и бессонных ночей!"
-    },{
-      id: 4,
-      title: 'Сайт школы образования',
-      skills: "Html, Css, JavaScript",
-      photo:  require('../../../../admin/assets/img/previews-4.jpg'),
-      link: "http://loftschool.ru",
-      desc: "Этот парень проходил обучение веб-разработке не где-то, а в LoftSchool! 2 месяца только самых тяжелых испытаний и бессонных ночей!"
-    }]
+  namespaced: true,
+  state: {
+    works: []
   },
-  mutations : {
-    
+  mutations: {
+    SET_WORKS: (state, works) => {
+      state.works = works;
+    },
+    ADD_WORKS: (state, newWork) => {
+      state.works.push(newWork);
+    },
+    REMOVE_WORK: (state, deletedWorkId) => {
+      state.works = state.works.filter(work => work.id !== deletedWorkId);
+    },    
+    EDIT_WORK: (state, editedWork) => {
+      state.works = state.works.map(work =>
+        work.id === editedWork.id ? editedWork : work
+      );
+    }
   },
   actions: {
-    updateWorks: async (context, name) => {
-      let {data} = await axios.post('https://webdev-api.loftschool.com/categories', {name: name})
-        .then(resp => {
-        axios.defaults.headers.common['Authorization'] = token
-      })
-  
-      if (data.status == 200) {
-        context.commit('updateWorks', name);
+    async fetchWorks({ commit }, works) {
+      try {
+        const response = await this.$axios.get("/works/106", works);
+        commit("SET_WORKS", response.data);
+        return response;
+      } catch (error) {
+        // error handling
       }
     },
-  },
-  getters: {
-    getWorks: state => state.works
+    
+   
+
+    async removeWork({ commit }, workId) {
+      try {
+        const response = await this.$axios.delete(`/works/${workId}`);
+        commit("REMOVE_WORK", workId);
+        return response;
+      } catch (error) {
+        generateStdError(error);
+      }
+    },
+    
   }
-}
+};

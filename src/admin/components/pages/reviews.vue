@@ -4,10 +4,12 @@
       h2.main-content__title Блок «Отзывы»
       addreviews(
         v-if="disabledRorm"
+        :showForm="showForm"
+        :mode="mode"
       )
       ul.admin-layout-list
-        li.admin-layout-list__item.add-item 
-          a(href="#" @click.prevent="disabledRorm = true").admin-layout-list__cont.add-item__link
+        li.admin-layout-list__item.add-item(v-if="!disabledRorm")
+          a(href="#" @click.prevent="showForm").admin-layout-list__cont.add-item__link
             span.add-item__icon +
             span.add-item__title Добавить отзыв
         reviews-item(
@@ -15,11 +17,6 @@
           :key="review.id"
           :review="review"
         )
-        
-
-
-
-
 </template>
 
 <script>
@@ -31,7 +28,8 @@ export default {
   },
   data() {
     return {
-      disabledRorm: false
+      disabledRorm: false,
+      mode: ''
     }
   },
   computed: {
@@ -40,7 +38,10 @@ export default {
     })
   }, 
   methods: {
-    ...mapActions('reviews', ["fetchReviews"]),    
+    ...mapActions('reviews', ["fetchReviews"]), 
+    showForm () {
+      this.disabledRorm = !this.disabledRorm;
+    }
   },
   async created() {
     try {
