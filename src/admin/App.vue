@@ -99,9 +99,10 @@ img {
   max-height: 100%;
 }
 .wrapper {
-  max-width: 1570px;
+  max-width: 1200px;
   margin: 0 auto;
   padding:  0 60px;
+  overflow: hidden;
   @include bp-tablets-lg{
     padding: 0 30px;
   }

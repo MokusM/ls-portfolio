@@ -1,9 +1,10 @@
 <template lang="pug">
   .addreviews
-    .addreviews__title Новый отзыв
+    .addreviews__title(v-if="editReview") Редактировать отзыв
+    .addreviews__title(v-else) Новый отзыв
     .addreviews__form 
       form.reviews-form(
-          @submit="mode === 'add' ?  editCurrentReview() : addNewReview()"
+          @submit="editReview  ?  editCurrentReview() : addNewReview()"
         )
         .reviews-form__avatar
           label.upload-avatar(:class="{error: validation.hasError('review.photo')}")
@@ -40,17 +41,15 @@
               .input-error {{ validation.firstError('review.text') }}
 
           .box-field-btn
-            a(type="#" @click.prevent="showForm").cancel-form Отмена
+            a(type="#" @click.prevent="closeForm").cancel-form Отмена
             input.btn.btn-orange(type="submit", value="Сохранить") 
-
-          pre {{currentReview}}
 
   
             
 </template>
 
 <script>
-import { mapActions, mapState } from "vuex";
+import { mapActions, mapState, mapMutations } from "vuex";
 import { Validator } from 'simple-vue-validator';
 import { renderer, getAbsoluteImgPath } from '@/helpers/pictures';
 import $axios from "@/requests";
@@ -71,11 +70,7 @@ export default {
     }
   },
   props: {
-    showForm: Function,
-    mode: {
-      type: String,
-      default: "add"
-    }
+    cancel: Function
   },
   data() {
     return {
@@ -91,23 +86,23 @@ export default {
   },
   watch: {
     currentReview(value){
-      if(this.mode === "edit") this.fillFormWithCurrentReviewData();
+      if(this.editReview === true) this.fillFormWithCurrentReviewData();
     }
   },
   created() {
-    if(this.mode === "edit") this.fillFormWithCurrentReviewData();
+    if(this.editReview === true) this.fillFormWithCurrentReviewData();
   },
   computed: {
     userAvatarUrl() {
       return `url(${this.renderedAvatar})`
     },
-    ...mapState('reviews', {
-      currentReview:  state => state.currentReview
-    })
+    ...mapState('reviews', {currentReview:  state => state.currentReview}),
+    ...mapState('reviews', {editReview:  state => state.edit}),    
   },
   methods: {
-    ...mapActions('reviews', ['addReview', "updateReview"]),
-    ...mapActions('tooltips', ["showTooltip"]),
+    ...mapActions('reviews', ['addReview', 'updateReview']),
+    ...mapActions('tooltips', ['showTooltip']),
+    ...mapMutations('reviews', ['setEdit']),
     closeForm() {
       this.review.author = '';
       this.review.occ = '';
@@ -115,10 +110,14 @@ export default {
       this.review.text = '';
       this.review.photo = '';
       this.disabledRorm = true;
+      this.setEdit(false);
+      this.cancel();
     },
     async editCurrentReview() {
+      console.log('editCurrentReview');
       if ((await this.$validate()) === false) return;
       this.disabledRorm = true;
+      this.setEdit(false);    
       try {
         const responce = await this.updateReview(this.review);
         this.clearFormFields();        
@@ -137,15 +136,13 @@ export default {
       }
     },
     async addNewReview() {
+      console.log('addNewReview');
       if ((await this.$validate()) === false) return;
       this.disabledRorm = true;
-      try {
+     
+     try {
         const responce = await this.addReview(this.review);
-        this.clearFormFields();        
-        this.showTooltip({
-          type: "success",
-          text: "Отзыв добавлен",
-        })
+        this.clearFormFields();
       } catch (error) {
         this.showTooltip({
           type: "error",

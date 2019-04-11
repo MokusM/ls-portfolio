@@ -2,7 +2,8 @@ export default {
   namespaced: true,
   state: {
     reviews: [],
-    currentReview: {}
+    currentReview: {},
+    edit: false
   },
   mutations: {
     SET_REVIEWS: (state, reviews) => {
@@ -20,7 +21,11 @@ export default {
       );
     },
     CHOOSE_REVIEW(state, item) {
-      state.currentReview =  item
+      state.currentReview =  item,
+      state.edit = true
+    },
+    setEdit (state, flag) {
+      state.edit = flag
     },
   },
   actions: {

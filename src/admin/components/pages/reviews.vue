@@ -3,9 +3,8 @@
     div.wrapper 
       h2.main-content__title Блок «Отзывы»
       addreviews(
-        v-if="disabledRorm"
-        :showForm="showForm"
-        :mode="mode"
+        v-if="disabledRorm || editReview"
+        :cancel="cancel"
       )
       ul.admin-layout-list
         li.admin-layout-list__item.add-item(v-if="!disabledRorm")
@@ -28,19 +27,20 @@ export default {
   },
   data() {
     return {
-      disabledRorm: false,
-      mode: ''
+      disabledRorm: false
     }
   },
   computed: {
-    ...mapState('reviews', {
-      reviews: state => state.reviews
-    })
+    ...mapState('reviews', {reviews: state => state.reviews}),
+    ...mapState('reviews', {editReview:  state => state.edit})
   }, 
   methods: {
     ...mapActions('reviews', ["fetchReviews"]), 
     showForm () {
       this.disabledRorm = !this.disabledRorm;
+    },
+    cancel() {
+      this.disabledRorm = false;
     }
   },
   async created() {

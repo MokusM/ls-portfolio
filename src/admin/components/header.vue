@@ -18,14 +18,26 @@
     },
     methods: {
       ...mapActions('user', ['logout']),
-      async logout() {
+      /*async logout() {
         try {
           await this.$store.dispatch('logout')
           console.log('logut')
         } catch (error) {
           // error 
         }
-      }
+      }*/
+      async logout() {
+        try {
+          const {
+            data: { token }
+          } = await $axios.post("/logout");
+          localStorage.removeItem("token", token);
+          delete $axios.defaults.headers["Authorization"];
+          this.$router.replace("/login");
+        } catch (error) {
+          console.log(error)
+        }
+      },
     }
   }
 </script>

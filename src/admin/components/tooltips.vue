@@ -7,9 +7,7 @@
 import { mapActions, mapState } from "vuex";
 export default {
   computed: {
-    ...mapState('tooltips', {
-      tooltip: state => state.tooltip
-    })
+    ...mapState('tooltips', {tooltip: state => state.tooltip})
   },
   methods: {
     ...mapActions('tooltips', ["hideTooltip"])

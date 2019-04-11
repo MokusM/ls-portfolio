@@ -16,9 +16,9 @@ script(type="text/x-template")#reviews-list
               p {{ review.text }}
             .reviews-author.reviews-slider__author
               .reviews-author__img
-                img(:src="review.author_pic" alt="").author-avatar
+                img(:src="`https://webdev-api.loftschool.com/${review.photo}`" alt="").author-avatar                
               .reviews-author__text
-                .reviews-author__name {{ review.author_name }}
-                .reviews-author__prof {{ review.author_occ }}
+                .reviews-author__name {{ review.author }}
+                .reviews-author__prof {{ review.occ }}
 
 

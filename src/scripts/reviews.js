@@ -36,8 +36,24 @@ new Vue({
       this.$refs.flickity.previous();
     }
   },
-  created() {
+  /*created() {
     const data = require("../data/reviews.json");
     this.reviews = this.makeArrWithImages(data);
+  }*/
+  created() {
+    fetch('https://webdev-api.loftschool.com/reviews/106')
+        .then((response) => {
+            if(response.ok) {
+                return response.json();
+            }        
+            this.$refs.flickity.rerender();
+        })
+        .then((json) => {
+          this.reviews = json;
+          console.log(json);
+        })
+        .catch((error) => {
+            console.log(error);
+        });
   }
 })

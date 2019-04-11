@@ -2,66 +2,57 @@
   content.main-content
     div.wrapper 
       h2.main-content__title Блок «Работы»
-      addworks
+      addworks(
+        v-if="disabledRorm || editWork"
+        :cancel="cancel"
+      )
       ul.admin-layout-list.works-list
-        .admin-layout-list__item.add-item 
-          a(href="#").admin-layout-list__cont.add-item__link
+        .admin-layout-list__item.add-item(v-if="!disabledRorm")
+          a(href="#" @click.prevent="showForm").admin-layout-list__cont.add-item__link
             span.add-item__icon +
             span.add-item__title Добавить работу
-        .admin-layout-list__item(v-for="work in works" :key="work.id")
-          .admin-layout-list__cont
-            .admin-layout-list__img
-              img(:src="work.photo" alt="")
-              ul.tag-list.admin-layout-list__tag
-                li.tag-list__item
-                  .tag-list__title 45
-            .admin-layout-list__text-content
-              .admin-layout-list__title {{ work.title }}                 
-
-              .admin-layout-list__text 
-                p {{ work.desc }} 
-              
-              a(:href="work.link").work-link {{ work.link }} 
-  
-              .admin-layout-list__bottom
-                a(href="#").link-change 
-                  span.link-change__text Править 
-                  span.link-change__icon
-                a(href="#").link-remove 
-                  span.link-remove__text Удалить 
-                  span.link-remove__icon
-  
-  
-  
-  
+        works-item(
+          v-for="work in works"
+          :key="work.id"
+          :work="work"
+        )
 </template>
   
 <script>
+
 import { mapActions, mapState } from "vuex";
-  export default {
-    name: "Works",
-    components: {
-      addworks: () => import('components/addworks')
+export default {
+  components: {
+    addworks: () => import('components/addworks.vue'),
+    worksItem: () => import("components/works-item.vue")
+  },
+  data() {
+    return {
+      disabledRorm: false
+    }
+  },
+  computed: {
+    ...mapState('works', {works: state => state.works}),
+    ...mapState('works', {editWork:  state => state.edit})
+  }, 
+  methods: {
+    ...mapActions('works', ["fetchWorks"]), 
+    showForm () {
+      this.disabledRorm = !this.disabledRorm;
     },
-    computed: {
-      ...mapState('works', {
-        works: state => state.works
-      })
-    },
-    methods: {
-      ...mapActions('works', ["fetchWorks"]),
-    },
-    async created() {
-      try {
-        await this.fetchWorks(); 
-      } catch (error) {
-        alert('Произошла ошибка при загрузке отзивов') 
-      }
-    },
-      
-  };
-  
-  </script>
+    cancel() {
+      this.disabledRorm = false;
+    }
+  },
+  async created() {
+    try {
+      await this.fetchWorks(); 
+    } catch (error) {
+      alert('Произошла ошибка при загрузке отзивов') 
+    }
+  },
+};
+</script>
   
 <style lang="postcss">
     @import "../../../styles/mixins.pcss";

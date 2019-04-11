@@ -22,7 +22,7 @@ const display = {
     works: Array,
     currentWork: Object,
     currentIndex: Number
-  }
+  } 
 }
 
 

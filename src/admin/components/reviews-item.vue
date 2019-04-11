@@ -1,9 +1,10 @@
 <template lang="pug">
-  .admin-layout-list__item
+  li.admin-layout-list__item
     .admin-layout-list__cont 
       .admin-layout-list__author.reviews-author
         .reviews-author__img
-          img(:src="review.photo" alt="").author-avatar
+          img(:src="`https://webdev-api.loftschool.com/${review.photo}`" alt="").author-avatar
+          
         .reviews-author__text
           .reviews-author__name {{ review.author }}
           .reviews-author__prof {{ review.occ }}              
@@ -21,18 +22,16 @@
 
 <script>
 import { mapActions, mapState, mapMutations } from "vuex";
-export default {
+export default {  
   props: {
-    review: Object,
-    mode: {
-      type: String,
-      default: "edit"
-    }
+    review: Object
   },
-  computed: { ...mapState('reviews', ['currentReview']) },
+  computed: { 
+    ...mapState('reviews', ['currentReview']) },
   methods: {
     ...mapActions("reviews", ["removeReview" ,"chooseReview"]),
     ...mapActions('tooltips', ["showTooltip"]),
+    ...mapMutations('reviews', ['setEdit']),
     async removeExistedReview() {
       try {        
         await this.removeReview(this.review.id); 
@@ -50,6 +49,7 @@ export default {
     async chooseBlock() {
       try {        
         await this.chooseReview(this.review);
+        this.setEdit(true);
         this.showTooltip({
           type: "success",
           text: "Отзыв выбран",
