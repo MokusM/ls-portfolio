@@ -3,26 +3,34 @@
     app-header(v-if="isLoggedIn")
     tabs(v-if="isLoggedIn")
     router-view
-    tooltips 
+    tooltips
+    .preloader(v-if="!loaded")
+      .icon-load
 </template>
 
 <script>
+  import { mapMutations,mapState } from 'vuex'
   export default {
     data() {
       return{
         isLoggedIn: true
       }
     },
+    computed: {...mapState(['loaded'])},
     components: {
       appHeader: () => import("components/header"),
       tabs: () => import("components/tabs"),
       tooltips: () => import("components/tooltips")
     },
     methods: {
+      ...mapMutations(['setLoaded']),
       cancelModal () {
         this.auth = false;
       }
-    }
+    },
+    mounted () {
+      this.setLoaded(true)
+    },
   }
 
 </script>
@@ -109,6 +117,16 @@ img {
   @include tablets{
     padding: 0 20px;
   }
+}
+
+.preloader{
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+  z-index: 100;
 }
 
 

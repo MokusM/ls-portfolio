@@ -8,22 +8,28 @@
         )
         .works-form__file
           .works-form__pic(v-if="editWork")
-            img(:src="`https://webdev-api.loftschool.com/${work.photo}`" alt="").author-avatar
-          .upload-file(
-              :class="{error: validation.hasError('work.photo')}"
-              v-else
-            )                      
-            .upload-file__title Перетащите или загрузите для загрузки изображения            
-            span.btn.btn-orange ЗАГРУЗИТЬ 
-            input(
-              type="file"      
-              @change="handlePhotoUpload"
-            )
-            .input-error {{ validation.firstError('work.photo') }}
+            .works-form__img( :style="{'backgroundImage' : workImgUrl, 'filled' : renderedImg.length}")
+              img(:src="`https://webdev-api.loftschool.com/${work.photo}`" v-if="!renderedImg.length" alt="").author-avatar
+            .upload-avatar__link(v-if="editWork") Редактировать фото
+              input(
+                type="file"      
+                @change="handlePhotoUpload"
+              ).works-form__change
+
+          .upload-file-wrap(v-else)        
+            .upload-file(
+              :class="{'error': validation.hasError('work.photo'), 'filled' : renderedImg.length}"
+                :style="{'backgroundImage' : workImgUrl}"
+              )                      
+              .upload-file__title(v-if="!renderedImg.length") Перетащите или загрузите для загрузки изображения            
+              span.btn.btn-orange(v-if="!renderedImg.length") ЗАГРУЗИТЬ  
+              input(
+                type="file"      
+                @change="handlePhotoUpload"
+              ).works-form__change              
+              .input-error {{ validation.firstError('work.photo') }}
         
-          .upload-avatar__img(             
-              :style="{'backgroundImage' : workImgUrl}"
-            )
+          
         .reviews-form__main
           .box-field(:class="{error: validation.hasError('work.work')}")
             label.box-field__label Название
@@ -47,7 +53,7 @@
               .input-error {{ validation.firstError('work.techs') }
           ul.tag-list.tag-list-with-remove
             li.tag-list__item(v-for="(tag, index) in tagsArray")
-              .tag-list__title {{ tag }}
+              .tag-list__title(v-if="tag.length") {{ tag }}
                 a(href="#" @click.prevent="removeTag(index)").tag-list__remote
           .box-field-btn
             a(type="#" @click.prevent="closeForm").cancel-form Отмена
@@ -204,9 +210,34 @@ export default {
 <style lang="postcss">
   @import "../../styles/mixins.pcss";
 
+.works-form__img{
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center top;
+  height: 300px;
+  width: 100%;
+  overflow: hidden;
+}
 .works-form__pic img{
   display: block;
-  max-width: 100%;
+  width: 100%;
+  max-height: 6000px;
+}
+.upload-avatar__link{
+  text-align: center;
+  margin-top: 10px;
+  position: relative;
+}
+.works-form__change{
+  transition: all 0.3s;
+  opacity: 0;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  display: block;
 }
 .addreviews {
   margin-bottom: 30px;
@@ -278,9 +309,7 @@ export default {
       margin-right: auto;
     }
     &.filled{
-      .upload-avatar__icon{
-        display: none;
-      }
+      border-color: transparent;
     }
   }
   &__icon{
@@ -570,6 +599,11 @@ textarea.form-control{
     height: 50px;
     border-radius: 25px;
   }
+  &.filled{
+    .upload-file__title{
+      display: none;
+    }
+  }
 }
 .tag-list-with-remove{
   .tag-list__title{
@@ -595,5 +629,6 @@ textarea.form-control{
     padding:  0 2px;
   }
 }
+
 </style>
   

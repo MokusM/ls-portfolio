@@ -8,7 +8,7 @@ script(type="text/x-template")#reviews-list
           button(type="button" @click="previous").slider-arrow.slider-next.slider-arrow_round
             +icon('arrow-down', 'arrow-right-icon')
     .section-reviews__slider
-      flickity(ref="flickity", :options="flickityOptions").reviews-slider
+      flickity(ref="flickity", :options="flickityOptions" v-if="Object.keys(reviews).length > 0").reviews-slider
         .carousel-cell.reviews-slider__item(v-for="review in reviews" :key="review.id")
           .reviews-slider__cont
             +icon('quote', 'quote-icon')

@@ -140,5 +140,9 @@ export default {
     font-size: 14px;
   }
 }
+.works-list .admin-layout-list__img{
+  max-height: 210px;
+  overflow: hidden;
+}
 </style>
   

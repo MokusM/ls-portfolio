@@ -17,7 +17,8 @@
               :style="{'backgroundImage' : userAvatarUrl}"
             )
               .upload-avatar__icon
-            .upload-avatar__link Добавить фото
+            .upload-avatar__link(v-if="renderedAvatar.length") Редактировать фото
+            .upload-avatar__link(v-else) Добавить фото
             .input-error {{ validation.firstError('review.photo') }}
 
         .reviews-form__main

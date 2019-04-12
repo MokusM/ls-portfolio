@@ -1,5 +1,5 @@
 import Vue from 'vue';
-
+import axios from 'axios';
 
 const btns = {
   template: "#slider-btns"
@@ -29,7 +29,8 @@ const display = {
 const tags = {
   template: "#slider-tags",
   props: {
-    tagsArray: Array
+    tagsArray: Array,
+    currentWork: Object
   }
 }
 const info = {
@@ -42,7 +43,7 @@ const info = {
   },
   computed: {
     tagsArray() {
-      return this.currentWork.skills.split(',')
+      return this.currentWork.techs.split(',')
     }
   }
 }
@@ -96,8 +97,12 @@ new Vue({
       this.currentIndex = parseInt(imageIndex);
     }
   },
-  created() {
-    const data = require("../data/works.json");
-    this.works = this.makeArrWithImages(data);
-  }
+  async created() {
+    try {
+      const works = await axios.get('https://webdev-api.loftschool.com/works/106');
+      this.works = works.data;
+    } catch (error) {
+      // error handling
+    }
+  }  
 })

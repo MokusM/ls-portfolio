@@ -8,7 +8,13 @@ export default new Vuex.Store({
 	state: {
 		admin: {
 			name: 'Николай Моисеев'
-		}
+		},
+		loaded: false
+	},
+	mutations:{
+		setLoaded (state, flag) {
+      state.loaded = flag
+    },
 	},
 	modules
 })
