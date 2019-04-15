@@ -1,5 +1,5 @@
 script(type="text/x-template")#slider-container
-  .portfolio-row
+  .portfolio-row(v-if="Object.keys(works).length")
     display(
       :works="works",
       :currentWork="currentWork",
@@ -9,6 +9,7 @@ script(type="text/x-template")#slider-container
     )    
     info(
       :currentWork="currentWork"
+      
     )    
 
 script(type="text/x-template")#slider-display
