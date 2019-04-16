@@ -1,4 +1,4 @@
-section.main-screen
+section.main-screen#hero
   .parallax
     div(data-speed="0.05").parallax__layer.parallax__layer_1 
       +image('content/main-screen-1.jpg', 'parallax__image')
@@ -12,7 +12,7 @@ section.main-screen
           span Николай 
           span Моисеев
     .main-screen__btn  
-      a.scroll-down(href="#")
+      button.scroll-down.js-btn-scroll
         span.scroll-down__text Скролл
         +icon('scroll', 'scroll-icon')
   .main-screen-bg.parallax

@@ -3,7 +3,8 @@ export default {
   state: {
     works: [],
     currentWork: {},
-    edit: false
+    edit: false,
+    editedTags: []
   },
   mutations: {
     SET_WORKS: (state, works) => {
@@ -24,6 +25,7 @@ export default {
       state.currentWork =  item,
       state.edit = true
     },
+
     setEdit (state, flag) {
       state.edit = flag
     },

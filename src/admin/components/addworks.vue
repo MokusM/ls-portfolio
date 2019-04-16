@@ -200,8 +200,8 @@ export default {
         })
       }
     },
-    removeTag(e) {
-      this.tagsArray.splice(this.tagsArray.indexOf(e), 1);
+    removeTag(index) {
+      this.tagsArray.splice(index, 1);
     }
   }
 };

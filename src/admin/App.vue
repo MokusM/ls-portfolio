@@ -4,7 +4,7 @@
     tabs(v-if="isLoggedIn")
     router-view
     tooltips
-    .preloader(v-if="loaded")
+    .preloader(v-if="!loaded")
       .preloader-list 
         .preloader-list__item
         .preloader-list__item
