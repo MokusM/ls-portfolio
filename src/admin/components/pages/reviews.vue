@@ -2,59 +2,59 @@
   content.main-content
     div.wrapper 
       h2.main-content__title Блок «Отзывы»
-      addreviews  
+      addreviews(
+        v-if="disabledRorm || editReview"
+        :cancel="cancel"
+      )
       ul.admin-layout-list
-        .admin-layout-list__item.add-item 
-          a(href="#").admin-layout-list__cont.add-item__link
+        li.admin-layout-list__item.add-item(v-if="!disabledRorm")
+          a(href="#" @click.prevent="showForm").admin-layout-list__cont.add-item__link
             span.add-item__icon +
             span.add-item__title Добавить отзыв
-        .admin-layout-list__item(v-for="(review, index) in reviews" :key="review.id")
-          .admin-layout-list__cont
-            .admin-layout-list__author.reviews-author
-              .reviews-author__img
-                img(:src="review.author_pic" alt="").author-avatar
-              .reviews-author__text
-                .reviews-author__name {{ review.author_name }}
-                .reviews-author__prof {{ review.author_occ }}              
-            .admin-layout-list__text 
-              p {{ review.text }} 
-
-            .admin-layout-list__bottom
-              a(href="#").link-change 
-                span.link-change__text Править 
-                span.link-change__icon
-              a(href="#").link-remove(@click="remove(review.id)") 
-                span.link-remove__text Удалить 
-                span.link-remove__icon
-
-
-
-
+        reviews-item(
+          v-for="review in reviews"
+          :key="review.id"
+          :review="review"
+        )
 </template>
 
 <script>
-import addreviews from "./addreviews";
+import { mapActions, mapState } from "vuex";
 export default {
-  name: "Reviews",
   components: {
-    addreviews
+    addreviews: () => import('components/addreviews.vue'),
+    reviewsItem: () => import("components/reviews-item.vue")
+  },
+  data() {
+    return {
+      disabledRorm: false
+    }
   },
   computed: {
-    reviews() {
-      return this.$store.getters.getReviews
+    ...mapState('reviews', {reviews: state => state.reviews}),
+    ...mapState('reviews', {editReview:  state => state.edit})
+  }, 
+  methods: {
+    ...mapActions('reviews', ["fetchReviews"]), 
+    showForm () {
+      this.disabledRorm = !this.disabledRorm;
+    },
+    cancel() {
+      this.disabledRorm = false;
     }
   },
-  methods: {
-      remove(item){
-        this.$store.dispatch('removeReviews', item);
-      }
+  async created() {
+    try {
+      await this.fetchReviews(); 
+    } catch (error) {
+      alert('Произошла ошибка при загрузке отзивов') 
     }
+  },
 };
-
 </script>
 
 <style lang="postcss">
-  @import "../../styles/mixins.pcss";
+  @import "../../../styles/mixins.pcss";
   .admin-layout-list{
     display: flex;
     margin: 0 -15px;

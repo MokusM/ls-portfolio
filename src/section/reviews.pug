@@ -1,4 +1,4 @@
-section.section-reviews  
+section.section-reviews#reviews
   div(data-speed="80").leaves-img.leaves-img_1.js-parallax-item
     +image('content/leaves-1.png')
   div(data-speed="31").leaves-img.leaves-img_2.js-parallax-item
@@ -9,7 +9,7 @@ section.section-reviews
     +image('content/leaves-4.png')
   .wrapper
     #reviews-slider  
-    h2.section-title.section-title_white.section-reviews__title.section-reviews__form-title Связаться со мной
+    h2.section-title.section-title_white.section-reviews__title.section-reviews__form-title#contacts Связаться со мной
     .box-form.section-reviews__form
       #reviews-form
         form(@submit.prevent="submit", method="post")

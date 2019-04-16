@@ -8,7 +8,15 @@ html(lang="en")
     meta(http-equiv="X-UA-Compatible", content="ie=edge")
     title Portfolio | main page
     link(rel='icon', type='image/x-icon', href='../images/content/favicon.ico')
-  body
+    <style type="text/css">.loaded .main-wrapper {opacity: 0;}</style>
+  body.loaded#body
+    #page-preloader.preloader
+      .preloader-list 
+        .preloader-list__item
+        .preloader-list__item
+        .preloader-list__item
+        .preloader-list__item
+        .preloader-list__item 
     .main-wrapper
       include ./section/header
       main.content   
@@ -26,6 +34,8 @@ html(lang="en")
       include ./section/footer
 
       include ./templates/entry
+
+      
 
 
       

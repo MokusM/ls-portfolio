@@ -1,9 +1,11 @@
 import Vue from 'vue';
 import Flickity from 'vue-flickity';
+import axios from 'axios';
 
 new Vue({
   el: "#reviews-slider",
   template: "#reviews-list",
+
   components: {
     Flickity
   },  
@@ -35,9 +37,14 @@ new Vue({
     previous() {
       this.$refs.flickity.previous();
     }
+    
   },
-  created() {
-    const data = require("../data/reviews.json");
-    this.reviews = this.makeArrWithImages(data);
+  async created() {
+    try {
+      const response = await axios.get('https://webdev-api.loftschool.com/reviews/106');
+      this.reviews = response.data;
+    } catch (error) {
+      // error handling
+    }
   }
 })

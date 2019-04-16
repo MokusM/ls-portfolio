@@ -7,14 +7,5 @@
       "Javascript": 40,
       "Jquery  и Vue.js": 60
     }
-  },
-  {
-    "skillsGroup": "Workflow",
-    "skills": {
-      "GIT": 60,
-      "Terminal": 40,
-      "Gulp": 50,
-      "Webpack": 30
-    }
   }
 ]

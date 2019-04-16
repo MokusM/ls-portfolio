@@ -2,11 +2,23 @@ header.header
   .header__wrapper.wrapper
     a.logo(href="#", title="Логотип Портфолио")
       +image('content/logo.png', 'logo-pic')
-    .header__nav     
-      +nav('main-nav_vertical-tab main-nav', ["Главная", "Обо мне", "Навыки" , "Работы", "Отзывы", "Связаться"])
-      +list-link('social_mob social', ["insta", "vk", "github"], 'social-icon')
+    .header__nav    
+      - var navItems = ["Главная", "Обо мне", "Навыки", "Работы", "Отзывы", "Связаться"];
+      - var navAnchors = ["#hero", "#about", "#skills", "#works", "#reviews", "#contacts"];
+        nav.main-nav.main-nav_vertical-tab
+          ul.main-nav-list
+            each item, index in navItems
+              li.main-nav-list__item
+                a(href=`${navAnchors[index]}`).main-nav-list__link #{item}
     .header__links
-      +list-link('social', ["insta", "vk", "github"], 'social-icon')
+      - var socialItems = ['insta', 'vk', 'github'];
+      - var socialAriaLabels = ['Перейти в Instagram', 'Перейти на ВКонтакте', "Перейти на GitHub"];
+      - var socialLinks = ['https://www.instagram.com/koljamoiseiev/', 'https://vk.com/m.moyseyev', "https://github.com/MokusM"];
+      ul.social-list
+        each item, index in socialItems
+          li(class='social-list__item')
+            a(href=`${socialLinks[index]}` aria-label=`${socialAriaLabels[index]}` target="_blank").social-list__link
+              +icon(item, `social-icon  social-icon_${item}`)
     .header__mob-button
       button.button-nav
         span

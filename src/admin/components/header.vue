@@ -1,7 +1,7 @@
 <template lang="pug">
   header.header
     div.wrapper.wrapper-flex
-      <User />
+      user
       span.header__title Панель администрирования
       a(href="#", @click="logout" ).logout Выйти
 
@@ -9,19 +9,35 @@
 </template>
 
 <script>
-  import User from "./user";
+  import { mapActions } from "vuex";
+  import $axios from "@/requests";
   export default {
     name: "Header",
     components: {
-      User
+      user: () => import("components/user")
     },
     methods: {
-      logout: function () {
-        this.$store.dispatch('logout')
-        .then(() => {
-          this.$router.push('/admin')
-        })
-      }
+      ...mapActions('user', ['logout']),
+      /*async logout() {
+        try {
+          await this.$store.dispatch('logout')
+          console.log('logut')
+        } catch (error) {
+          // error 
+        }
+      }*/
+      async logout() {
+        try {
+          const {
+            data: { token }
+          } = await $axios.post("/logout");
+          localStorage.removeItem("token", token);
+          delete $axios.defaults.headers["Authorization"];
+          this.$router.replace("/login");
+        } catch (error) {
+          console.log(error)
+        }
+      },
     }
   }
 </script>

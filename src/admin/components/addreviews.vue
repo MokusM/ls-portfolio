@@ -1,45 +1,191 @@
 <template lang="pug">
-  .addreviews 
-    .addreviews__title Новый отзыв
+  .addreviews
+    .addreviews__title(v-if="editReview") Редактировать отзыв
+    .addreviews__title(v-else) Новый отзыв
     .addreviews__form 
-      form.reviews-form
+      form.reviews-form(
+          @submit="editReview  ?  editCurrentReview() : addNewReview()"
+        )
         .reviews-form__avatar
-          .upload-avatar
-            .upload-avatar__img
+          label.upload-avatar(:class="{error: validation.hasError('review.photo')}")
+            input(
+              type="file"      
+              @change="handlePhotoUpload"
+            )
+            .upload-avatar__img(
+              :class="{'filled' : renderedAvatar.length}"
+              :style="{'backgroundImage' : userAvatarUrl}"
+            )
               .upload-avatar__icon
-            .upload-avatar__link Добавить фото
+            .upload-avatar__link(v-if="renderedAvatar.length") Редактировать фото
+            .upload-avatar__link(v-else) Добавить фото
+            .input-error {{ validation.firstError('review.photo') }}
+
         .reviews-form__main
           .box-field__row
-            .box-field
+            .box-field(:class="{error: validation.hasError('review.author')}")
               label.box-field__label Имя автора
               .box-field__input
-                input.form-control(type="text", value="Ковальчук Дмитрий" required)
-            .box-field
+                input.form-control(type="text", value="Ковальчук Дмитрий" v-model="review.author" )
+                .input-error {{ validation.firstError('review.author') }}
+
+            .box-field(:class="{error: validation.hasError('review.occ')}")
               label.box-field__label Титул автора
               .box-field__input              
-                input.form-control(type="text", value="Основатель LoftSchool" required)
-          .box-field
+                input.form-control(type="text", v-model="review.occ" )
+                .input-error {{ validation.firstError('review.occ') }}
+
+          .box-field(:class="{error: validation.hasError('review.text')}")
             label.box-field__label Отзыв
             .box-field__input
-              textarea.form-control(placeholder="Требуется ваша помощь в создании сайта. Интересуют сроки и цена вопроса")
+              textarea.form-control(v-model="review.text")
+              .input-error {{ validation.firstError('review.text') }}
+
           .box-field-btn
-            a(type="#").cancel-form Отмена
-            input.btn.btn-orange(type="submit", value="Сохранить")
+            a(type="#" @click.prevent="closeForm").cancel-form Отмена
+            input.btn.btn-orange(type="submit", value="Сохранить") 
 
   
-
-
+            
 </template>
 
 <script>
+import { mapActions, mapState, mapMutations } from "vuex";
+import { Validator } from 'simple-vue-validator';
+import { renderer, getAbsoluteImgPath } from '@/helpers/pictures';
+import $axios from "@/requests";
 export default {
-  name: "addreviews"
+  mixins: [require("simple-vue-validator").mixin],
+  validators: {
+    "review.author": value =>  {
+      return Validator.value(value).required("Заполните автора");
+    },
+    "review.occ": value =>  {
+      return Validator.value(value).required("Укажите роль автора");
+    },
+    "review.text": value =>  {
+      return Validator.value(value).required("Введите текст отзыва");
+    },
+    "review.photo": value =>  {
+      return Validator.value(value).required("Вставте аватар");
+    }
+  },
+  props: {
+    cancel: Function
+  },
+  data() {
+    return {
+      renderedAvatar: "",
+      review: {
+        id: 0,
+        author: "",
+        occ: "",
+        text: "",
+        photo: ""
+      }
+    }
+  },
+  watch: {
+    currentReview(value){
+      if(this.editReview === true) this.fillFormWithCurrentReviewData();
+    }
+  },
+  created() {
+    if(this.editReview === true) this.fillFormWithCurrentReviewData();
+  },
+  computed: {
+    userAvatarUrl() {
+      return `url(${this.renderedAvatar})`
+    },
+    ...mapState('reviews', {currentReview:  state => state.currentReview}),
+    ...mapState('reviews', {editReview:  state => state.edit}),    
+  },
+  methods: {
+    ...mapActions('reviews', ['addReview', 'updateReview']),
+    ...mapActions('tooltips', ['showTooltip']),
+    ...mapMutations('reviews', ['setEdit']),
+    closeForm() {
+      this.review.author = '';
+      this.review.occ = '';
+      this.review.author = '';
+      this.review.text = '';
+      this.review.photo = '';
+      this.disabledRorm = true;
+      this.setEdit(false);
+      this.cancel();
+    },
+    async editCurrentReview() {
+      console.log('editCurrentReview');
+      if ((await this.$validate()) === false) return;
+      this.disabledRorm = true;
+      this.setEdit(false);    
+      try {
+        const responce = await this.updateReview(this.review);
+        this.clearFormFields();        
+        this.showTooltip({
+          type: "success",
+          text: "Отзыв обновлен",
+        })
+      } catch (error) {
+        this.showTooltip({
+          type: "error",
+          text: error.message
+        })
+      } finally {
+        this.disabledRorm = false;
+        this.validation.reset();
+      }
+    },
+    async addNewReview() {
+      console.log('addNewReview');
+      if ((await this.$validate()) === false) return;
+      this.disabledRorm = true;
+     
+     try {
+        const responce = await this.addReview(this.review);
+        this.clearFormFields();
+      } catch (error) {
+        this.showTooltip({
+          type: "error",
+          text: error.message
+        })
+      } finally {
+        this.disabledRorm = false;
+        this.validation.reset();
+      }
+    },
+    clearFormFields() {
+      this.review.author = '';
+      this.review.occ = '';
+      this.review.author = '';
+      this.review.text = '';
+      this.review.photo = '';
+      this.renderedAvatar = "";      
+    },
+    fillFormWithCurrentReviewData() {
+      this.review = {...this.currentReview };
+      this.rendedPhotoUrl = getAbsoluteImgPath(this.currentReview.photo);
+    },
+    async handlePhotoUpload(e) {
+      const file = e.target.files[0];
+      this.review.photo = file; 
+      try {
+        const renderedResult = await renderer(file);
+        this.renderedAvatar = renderedResult;
+      } catch (error) {
+        this.showTooltip({
+          type: "error",
+          text: "Ошибка во время обработки файла"
+        })
+      }
+    }
+  }
 };
-
 </script>
 
 <style lang="postcss">
     @import "../../styles/mixins.pcss";
+
 .addreviews {
   margin-bottom: 30px;
   background-color: white;
@@ -89,6 +235,9 @@ export default {
 }
 .upload-avatar{
   text-align: center;
+  cursor: pointer;
+  position: relative;
+  display: block;
   @include tablets{
     margin-bottom: 35px;
   }
@@ -97,11 +246,19 @@ export default {
     height: 200px;
     background-color: #dee4ed;
     border-radius: 50%;
-    margin: 5px 11px 16px;
+    margin: 5px auto 16px;
     position: relative;
+    background-size: cover;
+    background-repeat: none;
+    background-position: center center;
     @include tablets{
       margin-left: auto;
       margin-right: auto;
+    }
+    &.filled{
+      .upload-avatar__icon{
+        display: none;
+      }
     }
   }
   &__icon{
@@ -121,11 +278,22 @@ export default {
     font-size: 16px;
     font-weight: 600;
     line-height: 34px;
-    padding-right: 17px;
+    padding-right: 0px;
     @include tablets{
       padding-right: 0;
     }
   } 
+  input{
+    position: absolute;
+    right:  -6000px;
+    visibility: hidden;
+    opacity: 0;
+  }
+  &.error{
+    .upload-avatar__img{        
+      background-color: #c76e6e;
+    }
+  }
 }
 .box-field{
   &__label{
